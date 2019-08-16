@@ -11,7 +11,10 @@
     <!--    </bean>-->
 
 
-        <bean id="cB" class="mine.CBean" />
+<!--        <bean id="cB" class="mine.CBean" init-method="init" />-->
 <!--        <bean id="bB" class="mine.BBean" p:i="111" />-->
-        <bean id="aware" class="mine.AwareBean" />
+<!--        <bean id="aware" class="mine.AwareBean" />-->
+
+
+
 </beans>

@@ -10,9 +10,10 @@
            https://www.springframework.org/schema/context/spring-context.xsd">
 
     <context:annotation-config/>
-        <import resource="ioc.xml"/>
+    <!--        <import resource="ioc.xml"/>-->
     <!--    <import resource="dao.xml"/>-->
-<!--    <import resource="hooks.xml"/>-->
+    <import resource="hooks.xml"/>
+<!--    <import resource="annotation.xml"/>-->
 
 
 </beans>

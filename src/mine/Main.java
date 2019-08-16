@@ -2,6 +2,7 @@ package mine;
 
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.GenericApplicationContext;
 
@@ -11,7 +12,9 @@ import org.springframework.context.support.GenericApplicationContext;
 public class Main {
     public static void main(String[] args) {
         System.out.println("~~Main~~");
-        ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+        ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+        context.start();
+        context.stop();
 //        One one = context.getBean("one", One.class);
 //        one.show();
 
@@ -22,6 +25,9 @@ public class Main {
 
 
 //        AwareBean aware = context.getBean("aware", AwareBean.class);
+
+//        context.registerShutdownHook();
+
 
     }
 }
