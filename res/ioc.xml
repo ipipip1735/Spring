@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!--        <bean id="one" class="mine.One" lazy-init="true"></bean>-->
+
+    <!--    <bean id="aB" class="mine.ABean">-->
+    <!--        <constructor-arg ref="bB"/>-->
+    <!--        <property name="c" ref="cB"/>-->
+    <!--    </bean>-->
+
+
+        <bean id="cB" class="mine.CBean" />
+<!--        <bean id="bB" class="mine.BBean" p:i="111" />-->
+        <bean id="aware" class="mine.AwareBean" />
+</beans>

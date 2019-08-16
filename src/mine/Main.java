@@ -12,7 +12,7 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("~~Main~~");
         ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
-        One one = context.getBean("one", One.class);
+//        One one = context.getBean("one", One.class);
 //        one.show();
 
 
@@ -20,6 +20,8 @@ public class Main {
 //        new XmlBeanDefinitionReader(genericApplicationContext).loadBeanDefinitions("service.xml");
 //        genericApplicationContext.refresh();
 
+
+//        AwareBean aware = context.getBean("aware", AwareBean.class);
 
     }
 }
