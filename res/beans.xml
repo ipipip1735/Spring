@@ -4,16 +4,27 @@
        xmlns:p="http://www.springframework.org/schema/p"
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="
-           http://www.springframework.org/schema/beans
-           http://www.springframework.org/schema/beans/spring-beans.xsd
-           http://www.springframework.org/schema/context
-           https://www.springframework.org/schema/context/spring-context.xsd">
+           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
+    <!--使用注解-->
     <context:annotation-config/>
-    <!--        <import resource="ioc.xml"/>-->
+
+
+
+
+    <!--包扫描-->
+    <!--    <context:component-scan base-package="scan">-->
+    <!--        <context:include-filter type="regex" expression=".A*"/>-->
+    <!--        <context:exclude-filter type="annotation" expression="scan.Af"/>-->
+    <!--    </context:component-scan>-->
+
+    <!--引入文件-->
+    <!--    <import resource="ioc.xml"/>-->
     <!--    <import resource="dao.xml"/>-->
-    <import resource="hooks.xml"/>
-<!--    <import resource="annotation.xml"/>-->
+    <!--    <import resource="hooks.xml"/>-->
+    <import resource="aop.xml"/>
+    <!--    <import resource="annotation.xml"/>-->
 
 
 </beans>

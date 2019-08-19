@@ -5,8 +5,10 @@ package mine;
  */
 public class BBean {
     private int i;
+
     public BBean() {
-        System.out.println("~~BBean.Constructor~~");
+        System.out.println("*********  " + getClass().getSimpleName() + ".Constructor  *********");
+
 
     }
 

@@ -4,12 +4,16 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!--    <bean id="cs" class="mine.CustomScopeBean" />-->
-<!--    <bean id="init" class="mine.InitBean"/>-->
+    <!--    <bean id="init" class="mine.InitBean"/>-->
     <!--    <bean id="init" class="mine.InitBean" init-method="init"/>-->
 
-        <bean id="lifecycle" class="mine.LifecycleBean" />
+    <!--    <bean id="lifecycle" class="mine.LifecycleBean" />-->
 
-<!--    <bean id="pp" class="mine.PostProcessorBean"/>-->
+    <!--    <bean id="pp" class="mine.PostProcessorBean"/>-->
+<!--        <bean id="ab" class="listen.ABean"/>-->
+<!--        <bean id="ob" class="listen.OBean"/>-->
+<!--        <bean id="pb" class="listen.PublishBean"/>-->
 
+        <bean id="aeb" class="listen.AEBean"/>
 
 </beans>

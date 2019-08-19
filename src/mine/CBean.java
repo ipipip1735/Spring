@@ -10,6 +10,6 @@ public class CBean {
     }
 
     public CBean() {
-        System.out.println("~~CBean.Constructor~~");
+        System.out.println("*********  " + getClass().getSimpleName() + ".Constructor  *********");
     }
 }
