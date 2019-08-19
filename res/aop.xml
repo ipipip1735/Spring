@@ -15,8 +15,8 @@
 
 <!--    <aop:config>-->
 <!--        <aop:aspect id="aa" ref="aaop">-->
-<!--            <aop:pointcut id="show" expression="execution(* aop.ABean.show())"/>-->
-<!--            <aop:before pointcut-ref="show" method="one"/>-->
+<!--            <aop:pointcut id="see" expression="execution(* aop.ABean.see())"/>-->
+<!--            <aop:before pointcut-ref="see" method="two"/>-->
 <!--        </aop:aspect>-->
 <!--    </aop:config>-->
 

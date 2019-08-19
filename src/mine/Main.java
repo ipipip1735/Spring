@@ -37,7 +37,11 @@ public class Main {
     private void aop() {
         ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
         aop.ABean aBean = context.getBean("ab", aop.ABean.class);
-        aBean.show();
+//        aBean.show();
+//        aBean.show(11);
+//        aBean.show(11, "eleven");
+        aBean.see(Integer.valueOf(333), Integer.valueOf(444));
+//        System.out.println(aBean.see());
     }
 
     private void iocBasic() {
