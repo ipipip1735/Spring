@@ -1,5 +1,6 @@
 package mine;
 
+import aop.OneI;
 import listen.PublishBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -38,6 +39,8 @@ public class Main {
         ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
         aop.ABean aBean = context.getBean("ab", aop.ABean.class);
         aBean.look();
+//        OneI oneI = aBean;
+//        oneI.show();
 //        aBean.show(11);
 //        aBean.show(11, "eleven");
 //        aBean.see(Integer.valueOf(333), Integer.valueOf(444));

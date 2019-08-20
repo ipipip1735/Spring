@@ -6,7 +6,7 @@ import mine.One;
  * Created by Administrator on 2019/8/18.
  */
 
-public class ABean implements OneI {
+public class ABean implements OneI{
     public ABean() {
         System.out.println("*********  " + getClass().getSimpleName() + ".Constructor  *********");
     }
@@ -28,16 +28,16 @@ public class ABean implements OneI {
 //            e.printStackTrace();
 //        }
     }
-
-    public void show(int i) {
-        System.out.println("~~" + getClass().getSimpleName() + ".show-i~~");
-        System.out.println("i is " + i);
-    }
-
-    public void show(int i, String s) {
-        System.out.println("~~" + getClass().getSimpleName() + ".show-i~~");
-        System.out.println("i is " + i);
-    }
+//
+//    public void show(int i) {
+//        System.out.println("~~" + getClass().getSimpleName() + ".show-i~~");
+//        System.out.println("i is " + i);
+//    }
+//
+//    public void show(int i, String s) {
+//        System.out.println("~~" + getClass().getSimpleName() + ".show-i~~");
+//        System.out.println("i is " + i);
+//    }
 
     public String see(Integer i, Integer j) {
         System.out.println("~~" + getClass().getSimpleName() + ".see~~");

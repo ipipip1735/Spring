@@ -23,4 +23,5 @@
 
     <bean id="aaop" class="aop.AAOP"/>
     <bean id="ab" class="aop.ABean"/>
+<!--    <bean id="cb" class="aop.CBean"/>-->
 </beans>

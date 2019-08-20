@@ -1,5 +1,6 @@
 package aop;
 
+import mine.One;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 
@@ -15,6 +16,9 @@ public class AAOP {
         System.out.println("*********  " + getClass().getSimpleName() + ".Constructor  *********");
     }
 
+    @DeclareParents(value="aop.ABean", defaultImpl=aop.CBean.class)
+    public OneI oi;
+
     //    @Pointcut("execution(public void aop.ABean.*())")
 //    @Pointcut("execution(public String aop.ABean.*(..))")
 //    public void pcOne() {}
@@ -27,18 +31,18 @@ public class AAOP {
 //    @Pointcut("execution(public * aop.ABean.*(int, String)) && args(i, s)")
 //    public void pcThree(int i, String s) {}
 
-    @Pointcut("this(aop.OneI)")
+    @Pointcut("execution(* aop.ABean.*())")
     public void pcFour() {}
 
 
-    public void one(String s) {
-        System.out.println("~~" + getClass().getSimpleName() + ".one1~~");
-    }
+//    public void one(String s) {
+//        System.out.println("~~" + getClass().getSimpleName() + ".one1~~");
+//    }
 
 
-    public void one(String s, int n) {
-        System.out.println("~~" + getClass().getSimpleName() + ".one2~~");
-    }
+//    public void one(String s, int n) {
+//        System.out.println("~~" + getClass().getSimpleName() + ".one2~~");
+//    }
 
 
 //    @Before("pcOne()")
@@ -99,9 +103,10 @@ public class AAOP {
 //        return retVal;
 //    }
 
-    @After("pcFour()")
-    public void four() {
+    @Before("pcFour() && target(oneI)")
+    public void four(OneI oneI) {
         System.out.println("~~" + getClass().getSimpleName() + ".four~~");
+        oneI.show();
     }
 
 }
