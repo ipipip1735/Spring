@@ -37,14 +37,26 @@ public class Main {
 
     private void aop() {
         ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
-        aop.ABean aBean = context.getBean("ab", aop.ABean.class);
-        aBean.look();
-//        OneI oneI = aBean;
-//        oneI.show();
-//        aBean.show(11);
-//        aBean.show(11, "eleven");
-//        aBean.see(Integer.valueOf(333), Integer.valueOf(444));
-//        System.out.println(aBean.see());
+        aop.ABean aBean = context.getBean("ab", aop.ABean.class);//获取Bean
+
+//        aBean.look();
+
+
+//        aBean.show();//零参数
+//        aBean.show(11);//单参数
+//        aBean.show(11, "eleven");//多参数
+
+
+        try {
+            aBean.error();//接收异常
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        //接收返回值
+//        String r = aBean.see(Integer.valueOf(333), Integer.valueOf(444));
+//        System.out.println(r);
     }
 
     private void iocBasic() {

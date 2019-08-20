@@ -6,13 +6,18 @@ import mine.One;
  * Created by Administrator on 2019/8/18.
  */
 
-public class ABean implements OneI{
+public class ABean{
     public ABean() {
         System.out.println("*********  " + getClass().getSimpleName() + ".Constructor  *********");
     }
 
     public void look() {
         System.out.println("~~" + getClass().getSimpleName() + ".look~~");
+//        this.show();
+    }
+
+    public void error() throws Exception {
+        throw new Exception("error test");
     }
 
     public void show() {
@@ -29,15 +34,15 @@ public class ABean implements OneI{
 //        }
     }
 //
-//    public void show(int i) {
-//        System.out.println("~~" + getClass().getSimpleName() + ".show-i~~");
-//        System.out.println("i is " + i);
-//    }
+    public void show(int i) {
+        System.out.println("~~" + getClass().getSimpleName() + ".show-i~~");
+        System.out.println("i is " + i);
+    }
 //
-//    public void show(int i, String s) {
-//        System.out.println("~~" + getClass().getSimpleName() + ".show-i~~");
-//        System.out.println("i is " + i);
-//    }
+    public void show(int i, String s) {
+        System.out.println("~~" + getClass().getSimpleName() + ".show-i~~");
+        System.out.println("i is " + i);
+    }
 
     public String see(Integer i, Integer j) {
         System.out.println("~~" + getClass().getSimpleName() + ".see~~");

@@ -21,9 +21,9 @@
 
     <!--引入文件-->
     <!--    <import resource="ioc.xml"/>-->
-        <import resource="dao.xml"/>
+<!--        <import resource="dao.xml"/>-->
     <!--    <import resource="hooks.xml"/>-->
-<!--    <import resource="aop.xml"/>-->
+    <import resource="aop.xml"/>
     <!--    <import resource="annotation.xml"/>-->
 
 
