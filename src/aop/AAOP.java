@@ -16,8 +16,8 @@ public class AAOP {
     }
 
     //    @Pointcut("execution(public void aop.ABean.*())")
-    @Pointcut("execution(public String aop.ABean.*(..))")
-    public void pcOne() {}
+//    @Pointcut("execution(public String aop.ABean.*(..))")
+//    public void pcOne() {}
 
 
 //    @Pointcut("execution(public * aop.ABean.*(int)) && args(i)")
@@ -26,6 +26,9 @@ public class AAOP {
 
 //    @Pointcut("execution(public * aop.ABean.*(int, String)) && args(i, s)")
 //    public void pcThree(int i, String s) {}
+
+    @Pointcut("this(aop.OneI)")
+    public void pcFour() {}
 
 
     public void one(String s) {
@@ -68,32 +71,37 @@ public class AAOP {
 //        System.out.println("error is " + error);
 //    }
 
-    @Around("pcOne()")
-    public Object four(ProceedingJoinPoint pjp) {
+//    @Around("pcOne()")
+//    public Object four(ProceedingJoinPoint pjp) {
+//        System.out.println("~~" + getClass().getSimpleName() + ".four~~");
+//
+//        pjp.getArgs();
+//
+//        // start stopwatch
+//        Object retVal = null;
+//        try {
+//
+//            //方式一
+//            retVal = pjp.proceed();
+//
+//            //方式二：传递参数
+////            Integer[] integers = new Integer[2];
+////            integers[0] = Integer.valueOf(111);
+////            integers[1] = Integer.valueOf(222);
+////            pjp.proceed(integers);
+//
+//            System.out.println("four.reVal is " + retVal);
+//        } catch (Throwable throwable) {
+//            throwable.printStackTrace();
+//        }
+//        retVal = "no";
+//        // stop stopwatch
+//        return retVal;
+//    }
+
+    @After("pcFour()")
+    public void four() {
         System.out.println("~~" + getClass().getSimpleName() + ".four~~");
-
-        pjp.getArgs();
-
-        // start stopwatch
-        Object retVal = null;
-        try {
-
-            //方式一
-            retVal = pjp.proceed();
-
-            //方式二：传递参数
-//            Integer[] integers = new Integer[2];
-//            integers[0] = Integer.valueOf(111);
-//            integers[1] = Integer.valueOf(222);
-//            pjp.proceed(integers);
-
-            System.out.println("four.reVal is " + retVal);
-        } catch (Throwable throwable) {
-            throwable.printStackTrace();
-        }
-        retVal = "no";
-        // stop stopwatch
-        return retVal;
     }
 
 }

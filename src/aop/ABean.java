@@ -1,12 +1,18 @@
 package aop;
 
+import mine.One;
+
 /**
  * Created by Administrator on 2019/8/18.
  */
 
-public class ABean {
+public class ABean implements OneI {
     public ABean() {
         System.out.println("*********  " + getClass().getSimpleName() + ".Constructor  *********");
+    }
+
+    public void look() {
+        System.out.println("~~" + getClass().getSimpleName() + ".look~~");
     }
 
     public void show() {

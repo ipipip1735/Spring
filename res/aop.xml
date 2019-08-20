@@ -10,6 +10,7 @@
 
     <!--自动代理-->
     <aop:aspectj-autoproxy/>
+    <aop:config proxy-target-class="true"/>
 
 <!--    <aop:scoped-proxy/>-->
 
