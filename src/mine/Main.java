@@ -1,7 +1,5 @@
 package mine;
 
-import aop.OneI;
-import listen.PublishBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -29,17 +27,23 @@ public class Main {
     }
 
     private void xml() {
-//        iocBasic();
+//        ioc();
 //        lifecyle();
 //        event();
         aop();
+//        tm();
+    }
+
+    private void tm() {
+        ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+//        context.getBean("dataSource", aop.ABean.class);//获取Bean
+
     }
 
     private void aop() {
         ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
         aop.ABean aBean = context.getBean("ab", aop.ABean.class);//获取Bean
-
-//        aBean.look();
+        aBean.look();
 
 
 //        aBean.show();//零参数
@@ -47,11 +51,11 @@ public class Main {
 //        aBean.show(11, "eleven");//多参数
 
 
-        try {
-            aBean.error();//接收异常
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            aBean.error();//接收异常
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
 
         //接收返回值
@@ -59,7 +63,7 @@ public class Main {
 //        System.out.println(r);
     }
 
-    private void iocBasic() {
+    private void ioc() {
         ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 //        One one = context.getBean("one", One.class);
 //        one.show();

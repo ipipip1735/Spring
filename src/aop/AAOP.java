@@ -3,6 +3,7 @@ package aop;
 import mine.One;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
+import org.springframework.core.annotation.Order;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -34,13 +35,13 @@ public class AAOP {
 
     /*********传递参数*********/
     //零参数
-//    @Pointcut("execution(public * aop.ABean.*())")
-//    public void pcOne() {}
+    @Pointcut("execution(public * aop.ABean.*())")
+    public void pcOne() {}
 //
-//    @Before("pcOne()")
-//    public void one() {
-//        System.out.println("~~" + getClass().getSimpleName() + ".one~~");
-//    }
+    @Before("pcOne()")
+    public void one() {
+        System.out.println("~~" + getClass().getSimpleName() + ".one~~");
+    }
 //    @After("pcOne()")
 //    public void two() {
 //        System.out.println("~~" + getClass().getSimpleName() + ".two~~");
@@ -98,7 +99,7 @@ public class AAOP {
 //        System.out.println("~~" + getClass().getSimpleName() + ".four~~");
 //
 //        System.out.println("getArgs is " + pjp.getArgs());//获取参数
-//        System.out.println("getThis is " + pjp.getThis());//获取this对象,即代理对象
+//        System.out.println("getThis is " + pjp.getThis());//获取this对象，即代理对象
 //        System.out.println("getTarget is " + pjp.getTarget());//获取目标对象
 //        System.out.println("getSignature is " + pjp.getSignature());//获取签名
 //        System.out.println("toString is " + pjp.toString());

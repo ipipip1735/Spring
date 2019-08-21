@@ -3,12 +3,19 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+
+        <bean id="one" class="mine.One">
+            <property name="s" value="${s:88}"/>
+<!--            <property name="i" value="${i: 11}"/>-->
+<!--            <property name="f" value="${f: 1.5f}"/>-->
+<!--            <property name="ints" value="${ints: 0,2}"/>-->
+        </bean>
 <!--        <bean id="one" class="mine.One" lazy-init="true"></bean>-->
 
-    <!--    <bean id="aB" class="mine.ABean">-->
-    <!--        <constructor-arg ref="bB"/>-->
-    <!--        <property name="c" ref="cB"/>-->
-    <!--    </bean>-->
+<!--        <bean id="aB" class="mine.ABean">-->
+<!--            <constructor-arg ref="bB"/>-->
+<!--            <property name="c" ref="cB"/>-->
+<!--        </bean>-->
 
 
 <!--        <bean id="cB" class="mine.CBean" init-method="init" />-->

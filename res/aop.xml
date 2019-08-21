@@ -7,21 +7,29 @@
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
-
     <!--自动代理-->
-    <aop:aspectj-autoproxy/>
-    <aop:config proxy-target-class="true"/>
+    <aop:aspectj-autoproxy
+            proxy-target-class="true"/><!--强制使用CGLIB-->
 
-<!--    <aop:scoped-proxy/>-->
 
-<!--    <aop:config>-->
-<!--        <aop:aspect id="aa" ref="aaop">-->
-<!--            <aop:pointcut id="see" expression="execution(* aop.ABean.see())"/>-->
-<!--            <aop:before pointcut-ref="see" method="two"/>-->
-<!--        </aop:aspect>-->
-<!--    </aop:config>-->
+    <!--代理配置-->
+    <!--    <aop:scoped-proxy/>-->
+    <!--    <aop:config-->
+    <!--            proxy-target-class="true"> &lt;!&ndash;强制使用CGLIB&ndash;&gt;-->
+    <!--        <aop:aspect id="aa" ref="aaop">-->
+    <!--            <aop:pointcut id="see" expression="execution(* aop.ABean.see())"/>-->
+    <!--            <aop:before pointcut-ref="see" method="one"/>-->
+    <!--        </aop:aspect>-->
+    <!--    </aop:config>-->
 
+    <!--切面-->
     <bean id="aaop" class="aop.AAOP"/>
+    <bean id="baop" class="aop.BAOP"/>
+    <bean id="caop" class="aop.CAOP">
+        <property name="order" value="3"/>
+    </bean>
+
+    <!--目标对象-->
     <bean id="ab" class="aop.ABean"/>
-<!--    <bean id="cb" class="aop.CBean"/>-->
+    <bean id="cb" class="aop.CBean"/>
 </beans>

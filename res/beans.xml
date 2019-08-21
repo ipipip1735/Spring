@@ -10,7 +10,8 @@
     <!--使用注解-->
     <context:annotation-config/>
 
-
+    <!--指定属性配置文件路径-->
+    <context:property-placeholder location="classpath:one.properties, jdbc.properties"/>
 
 
     <!--包扫描-->
@@ -21,10 +22,16 @@
 
     <!--引入文件-->
     <!--    <import resource="ioc.xml"/>-->
-<!--        <import resource="dao.xml"/>-->
     <!--    <import resource="hooks.xml"/>-->
+
+    <!--基于注解的配置-->
+<!--    <import resource="annotation.xml"/>-->
+
+    <!--切面-->
     <import resource="aop.xml"/>
-    <!--    <import resource="annotation.xml"/>-->
+
+    <!--事务-->
+<!--    <import resource="tm.xml"/>-->
 
 
 </beans>
