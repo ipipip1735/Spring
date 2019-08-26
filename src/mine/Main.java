@@ -36,7 +36,14 @@ public class Main {
 //        lifecyle();
 //        event();
 //        aop();
-        tm();
+//        tm();
+        template();
+    }
+
+    private void template() {
+        ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+        tm.OneService oneService = context.getBean("oneService", tm.OneService.class);
+        oneService.see();
     }
 
     private void tm() {
@@ -51,11 +58,8 @@ public class Main {
 
 
         //基于注解
-        TwoTM two = (TwoTM) context.getBean("twoTM");//获取Bean
-        two.see();
-
-
-
+//        TwoTM two = (TwoTM) context.getBean("twoTM");//获取Bean
+//        two.see();
     }
 
     private void aop() {
