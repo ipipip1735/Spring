@@ -4,7 +4,12 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import scan.CSBean;
+import tm.DefaultFooService;
+import tm.FooService;
+import tm.OneTM;
+import tm.TwoTM;
 
 /**
  * Created by Administrator on 2019/8/15 11:57.
@@ -36,7 +41,20 @@ public class Main {
 
     private void tm() {
         ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
-//        context.getBean("dataSource", aop.ABean.class);//获取Bean
+
+        //基于XML
+//        FooService fooService = (FooService) context.getBean("fooService");//获取Bean
+//        int i = fooService.getI();
+//        System.out.println("i is " + i);
+//
+//        fooService.show();
+
+
+        //基于注解
+        TwoTM two = (TwoTM) context.getBean("twoTM");//获取Bean
+        two.see();
+
+
 
     }
 
