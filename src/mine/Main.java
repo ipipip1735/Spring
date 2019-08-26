@@ -30,8 +30,8 @@ public class Main {
 //        ioc();
 //        lifecyle();
 //        event();
-        aop();
-//        tm();
+//        aop();
+        tm();
     }
 
     private void tm() {

@@ -11,7 +11,7 @@
     <context:annotation-config/>
 
     <!--指定属性配置文件路径-->
-    <context:property-placeholder location="classpath:one.properties, jdbc.properties"/>
+<!--    <context:property-placeholder location="classpath:one.properties"/>-->
 
 
     <!--包扫描-->
@@ -28,10 +28,10 @@
 <!--    <import resource="annotation.xml"/>-->
 
     <!--切面-->
-    <import resource="aop.xml"/>
+<!--    <import resource="aop.xml"/>-->
 
     <!--事务-->
-<!--    <import resource="tm.xml"/>-->
+    <import resource="tm.xml"/>
 
 
 </beans>
