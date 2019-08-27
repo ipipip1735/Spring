@@ -6,15 +6,14 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 /**
  * Created by Administrator on 2019/8/26 9:24.
  */
-@Transactional
-public class TwoTM {
-    public TwoTM() {
+public class OneBean {
+    public OneBean() {
         System.out.println("*********  " + getClass().getSimpleName() + ".Constructor  *********");
     }
 
     public void see() {
         System.out.println("~~" + getClass().getSimpleName() + ".see~~");
-        System.out.println(TransactionAspectSupport.currentTransactionStatus().isCompleted());
+        System.out.println(TransactionAspectSupport.currentTransactionStatus().hasSavepoint());
     }
 
     public void getSelf() {

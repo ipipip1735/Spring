@@ -4,12 +4,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import scan.CSBean;
-import tm.DefaultFooService;
-import tm.FooService;
-import tm.OneTM;
-import tm.TwoTM;
+import tm.*;
 
 /**
  * Created by Administrator on 2019/8/15 11:57.
@@ -42,24 +38,30 @@ public class Main {
 
     private void template() {
         ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
-        tm.OneService oneService = context.getBean("oneService", tm.OneService.class);
-        oneService.see();
+        ThreeBean threeBean = context.getBean("threeBean", ThreeBean.class);
+        threeBean.see();
     }
 
     private void tm() {
         ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 
         //基于XML
+        //方式一：事务增加在类上
+//        OneBean oneBean = (OneBean) context.getBean("oneBean");
+//        oneBean.see();
+
+        //方式二：事务增加在接口上
 //        FooService fooService = (FooService) context.getBean("fooService");//获取Bean
 //        int i = fooService.getI();
 //        System.out.println("i is " + i);
-//
 //        fooService.show();
 
 
+
+
         //基于注解
-//        TwoTM two = (TwoTM) context.getBean("twoTM");//获取Bean
-//        two.see();
+        TwoBean twoBean = (TwoBean) context.getBean("twoBean");
+        twoBean.see();
     }
 
     private void aop() {

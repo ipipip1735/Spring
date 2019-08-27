@@ -10,15 +10,15 @@ import org.springframework.transaction.support.TransactionTemplate;
 /**
  * Created by Administrator on 2019/8/27.
  */
-public class OneService {
+public class ThreeBean {
     private final TransactionTemplate transactionTemplate;
 
-    public OneService(PlatformTransactionManager transactionManager) {
+    public ThreeBean(PlatformTransactionManager transactionManager) {
         System.out.println("*********  " + getClass().getSimpleName() + ".Constructor  *********");
         this.transactionTemplate = new TransactionTemplate(transactionManager);
 
-//        this.transactionTemplate.setIsolationLevel(TransactionDefinition.ISOLATION_READ_UNCOMMITTED);
-//        this.transactionTemplate.setTimeout(30);
+        this.transactionTemplate.setIsolationLevel(TransactionDefinition.ISOLATION_READ_UNCOMMITTED);
+        this.transactionTemplate.setTimeout(30);
     }
 
 
