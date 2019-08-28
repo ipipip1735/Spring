@@ -13,7 +13,7 @@ public class BBean {
     }
 
     public void setI(int i) {
-        System.out.println("~~setI~~");
+        System.out.println("~~" + getClass().getSimpleName() + ".setC~~");
         this.i = i;
     }
 }

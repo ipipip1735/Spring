@@ -20,8 +20,8 @@ public class Main {
 
         Main main = new Main();
 
-//        main.xml();//基于XML的配置
-        main.annotation();//基于Annotation的配置
+        main.xml();//基于XML的配置
+//        main.annotation();//基于Annotation的配置
 
 
     }
@@ -52,7 +52,8 @@ public class Main {
     }
 
     private void coreAnno() {
-        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(CSBean.class);
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(core.Configure.class);
+        applicationContext.getBean("aa");
 
     }
 
@@ -66,9 +67,25 @@ public class Main {
     }
 
     private void template() {
+//        transactionTemplate();//事务模板
+        jdbcTemplate();//JDBC模板
+    }
+
+    private void transactionTemplate() {
         ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
         ThreeBean threeBean = context.getBean("threeBean", ThreeBean.class);
         threeBean.see();
+    }
+
+    private void jdbcTemplate() {
+        ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+        OneJDBC oneJDBC = context.getBean("oneJDBC", tm.OneJDBC.class);
+//        oneJDBC.query();
+//        oneJDBC.delete();
+//        oneJDBC.insert();
+//        oneJDBC.update();
+        oneJDBC.batch();
+
     }
 
     private void tm() {

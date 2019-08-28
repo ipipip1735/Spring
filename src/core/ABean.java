@@ -8,12 +8,12 @@ public class ABean {
     private CBean c;
 
     public void setC(CBean c) {
-        System.out.println("~~setC~~");
+        System.out.println("~~" + getClass().getSimpleName() + ".setC~~");
         this.c = c;
     }
 
     public ABean(BBean b) {
-        System.out.println("~~ABean.Constructor~~");
+        System.out.println("*********  " + getClass().getSimpleName() + ".Constructor  *********");
 
         System.out.println(b);
         this.b = b;
