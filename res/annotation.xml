@@ -4,8 +4,8 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
-    <bean id="annoB" class="mine.AnnotationBean" init-method="init" destroy-method="destroy"/>
-<!--    <bean id="aw" class="mine.AutowiredBean"/>-->
-<!--    <bean id="fB" class="mine.FactoryBean"/>-->
+    <bean id="annoB" class="core.AnnotationBean" init-method="init" destroy-method="destroy"/>
+<!--    <bean id="aw" class="core.AutowiredBean"/>-->
+<!--    <bean id="fB" class="core.FactoryBean"/>-->
 
 </beans>

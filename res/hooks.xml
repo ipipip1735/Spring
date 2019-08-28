@@ -3,13 +3,13 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <!--    <bean id="cs" class="mine.CustomScopeBean" />-->
-    <!--    <bean id="init" class="mine.InitBean"/>-->
-    <!--    <bean id="init" class="mine.InitBean" init-method="init"/>-->
+    <!--    <bean id="cs" class="core.CustomScopeBean" />-->
+    <!--    <bean id="init" class="core.InitBean"/>-->
+    <!--    <bean id="init" class="core.InitBean" init-method="init"/>-->
 
-    <!--    <bean id="lifecycle" class="mine.LifecycleBean" />-->
+    <!--    <bean id="lifecycle" class="core.LifecycleBean" />-->
 
-    <!--    <bean id="pp" class="mine.PostProcessorBean"/>-->
+    <!--    <bean id="pp" class="core.PostProcessorBean"/>-->
 <!--        <bean id="ab" class="listen.ABean"/>-->
 <!--        <bean id="ob" class="listen.OBean"/>-->
 <!--        <bean id="pb" class="listen.PublishBean"/>-->

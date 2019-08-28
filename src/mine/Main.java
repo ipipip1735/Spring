@@ -7,6 +7,10 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import scan.CSBean;
 import tm.*;
 
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.SQLException;
+
 /**
  * Created by Administrator on 2019/8/15 11:57.
  */
@@ -16,13 +20,38 @@ public class Main {
 
         Main main = new Main();
 
-        main.xml();//基于XML的配置
-//        main.annotation();//基于Annotation的配置
+//        main.xml();//基于XML的配置
+        main.annotation();//基于Annotation的配置
 
 
     }
 
     private void annotation() {
+//        coreAnno();
+        tmAnno();
+
+    }
+
+    private void tmAnno() {
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(tm.Configure.class);
+
+        //获取数据源
+//        DataSource dataSource = (DataSource) applicationContext.getBean("dataSource");
+//        try {
+//            Connection connection = dataSource.getConnection();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+
+
+        //获取Bean
+        TwoBean twoBean = (TwoBean) applicationContext.getBean("twoBean");
+        twoBean.see();
+
+
+    }
+
+    private void coreAnno() {
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(CSBean.class);
 
     }

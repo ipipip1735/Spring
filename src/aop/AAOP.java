@@ -1,12 +1,6 @@
 package aop;
 
-import mine.One;
-import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
-import org.springframework.core.annotation.Order;
-
-import java.util.Collection;
-import java.util.Collections;
 
 /**
  * Created by Administrator on 2019/8/18.

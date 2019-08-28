@@ -1,4 +1,4 @@
-package mine;
+package core;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
