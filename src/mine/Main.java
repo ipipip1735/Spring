@@ -1,5 +1,6 @@
 package mine;
 
+import dao.PersonDAO;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -63,12 +64,11 @@ public class Main {
 //        event();
 //        aop();
 //        tm();
-        template();
+        dao();
     }
 
     private void template() {
-//        transactionTemplate();//事务模板
-        jdbcTemplate();//JDBC模板
+        transactionTemplate();//事务模板
     }
 
     private void transactionTemplate() {
@@ -77,21 +77,23 @@ public class Main {
         threeBean.see();
     }
 
-    private void jdbcTemplate() {
+    private void dao() {
         ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
-        OneJDBC oneJDBC = context.getBean("oneJDBC", tm.OneJDBC.class);
-//        oneJDBC.query();
-//        oneJDBC.delete();
-//        oneJDBC.insert();
-//        oneJDBC.update();
-        oneJDBC.batch();
+        PersonDAO personDAO = context.getBean("personDAO", PersonDAO.class);
+//        personDAO.query();
+//        personDAO.delete();
+//        personDAO.insert();
+//        personDAO.update();
+//        personDAO.batchInsert();
+//        personDAO.batchUpdate();
+        personDAO.execute();
 
     }
 
     private void tm() {
         ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 
-        //基于XML
+        //可探测事务（基于XML）
         //方式一：事务增加在类上
 //        OneBean oneBean = (OneBean) context.getBean("oneBean");
 //        oneBean.see();
@@ -103,11 +105,16 @@ public class Main {
 //        fooService.show();
 
 
+        //可探测事务（基于Annotation）
+//        TwoBean twoBean = (TwoBean) context.getBean("twoBean");
+//        twoBean.see();
 
 
-        //基于注解
-        TwoBean twoBean = (TwoBean) context.getBean("twoBean");
-        twoBean.see();
+
+
+        //程序式事务（使用事务模板）
+//        template();
+
     }
 
     private void aop() {

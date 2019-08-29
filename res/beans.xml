@@ -33,7 +33,9 @@
     <!--事务-->
 <!--    <import resource="tm.xml"/>-->
 <!--    <import resource="tm_annatation.xml"/>-->
-    <import resource="tm_template.xml"/>
+
+    <!--数据访问-->
+    <import resource="dao.xml"/>
 
 
 </beans>
