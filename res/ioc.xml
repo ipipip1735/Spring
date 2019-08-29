@@ -18,9 +18,17 @@
 <!--        </bean>-->
 
 
-<!--        <bean id="cB" class="core.CBean" init-method="init" />-->
 <!--        <bean id="bB" class="core.BBean" p:i="111" />-->
 <!--        <bean id="aware" class="core.AwareBean" />-->
+
+
+    <!--Bean作用域-->
+<!--        <bean id="cs" class="core.CustomScopeBean" />-->
+
+    <!--Bean初始化方法-->
+<!--        <bean id="cB" class="core.CBean" init-method="init" />-->
+    <!--    <bean id="init" class="core.InitBean"/>-->
+    <!--    <bean id="init" class="core.InitBean" init-method="init"/>-->
 
 
 

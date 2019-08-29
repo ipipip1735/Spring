@@ -1,16 +1,12 @@
 package mine;
 
 import dao.PersonDAO;
+import listen.OneApplicationEventPublisherAware;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import scan.CSBean;
 import tm.*;
-
-import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.SQLException;
 
 /**
  * Created by Administrator on 2019/8/15 11:57.
@@ -63,8 +59,8 @@ public class Main {
 //        lifecyle();
 //        event();
 //        aop();
-//        tm();
-        dao();
+        tm();
+//        dao();
     }
 
     private void template() {
@@ -92,6 +88,7 @@ public class Main {
 
     private void tm() {
         ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+        context.start();
 
         //可探测事务（基于XML）
         //方式一：事务增加在类上
@@ -106,10 +103,9 @@ public class Main {
 
 
         //可探测事务（基于Annotation）
-//        TwoBean twoBean = (TwoBean) context.getBean("twoBean");
-//        twoBean.see();
-
-
+        TwoBean twoBean = (TwoBean) context.getBean("twoBean");
+//        twoBean.insert();
+        twoBean.look();
 
 
         //程序式事务（使用事务模板）
@@ -164,11 +160,20 @@ public class Main {
     private void event() {
         ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 
-        context.start();
-//        context.stop();
+        //上下文事件
+        context.start();//启动上下文，触发started事件
+//     context.stop();//停止上下文，触发stopped事件
+//        try {
+//            Thread.sleep(3000L);
+//            context.stop();//停止上下文，触发stopped事件
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
 
-//        PublishBean publishBean = context.getBean("pb", PublishBean.class);
-//        publishBean.dispatch(new Object());
+
+        //自定义事件
+//        OneApplicationEventPublisherAware publishBean = context.getBean("oneApplicationEventPublisherAware", OneApplicationEventPublisherAware.class);
+//        publishBean.dispatch(new Object());//发射自定义事件
 
     }
 }

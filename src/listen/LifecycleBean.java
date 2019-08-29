@@ -1,4 +1,4 @@
-package core;
+package listen;
 
 import org.springframework.context.Lifecycle;
 
@@ -27,7 +27,7 @@ public class LifecycleBean implements Lifecycle {
                         e.printStackTrace();
                     }
 
-                    if (isRunning)break;
+                    if (!isRunning)break;
                 }
             }
         });

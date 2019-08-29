@@ -6,12 +6,11 @@ import org.springframework.context.ApplicationEventPublisherAware;
 /**
  * Created by Administrator on 2019/8/18.
  */
-
-public class PublishBean implements ApplicationEventPublisherAware {
+public class OneApplicationEventPublisherAware implements ApplicationEventPublisherAware {
 
     private ApplicationEventPublisher applicationEventPublisher;
 
-    public PublishBean() {
+    public OneApplicationEventPublisherAware() {
         System.out.println("*********  " + getClass().getSimpleName() + ".Constructor  *********");
     }
 
@@ -25,6 +24,6 @@ public class PublishBean implements ApplicationEventPublisherAware {
 
     public void dispatch(Object o) {
         System.out.println("~~" + getClass().getSimpleName() + ".dispatch~~");
-        applicationEventPublisher.publishEvent(new MineEvent(this, o));
+        applicationEventPublisher.publishEvent(new OneEvent(this, o));
     }
 }

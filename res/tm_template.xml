@@ -17,10 +17,6 @@
     </bean>
 
 
-
-    <!--引入事务监听器-->
-    <bean id="oneTEL"  class="tm.OneTransactionEventListener" />
-
     <!--引入Bean（事务管理对象）-->
     <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>

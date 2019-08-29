@@ -10,6 +10,14 @@
        http://www.springframework.org/schema/tx https://www.springframework.org/schema/tx/spring-tx.xsd
        http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
+
+    <!--引入Bean（事务管理对象）-->
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <tx:annotation-driven transaction-manager="txManager" />
+
     <!--指定属性配置文件路径-->
     <context:property-placeholder location="classpath:jdbc.properties"/>
 
@@ -20,21 +28,16 @@
         <property name="password" value="${jdbc.password}"/>
     </bean>
 
-    <!--配置事务管理对象-->
-    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource"/>
-    </bean>
-
-
-    <!--启动基于注解的事务配置-->
-    <tx:annotation-driven transaction-manager="txManager" />
-<!--    <tx:annotation-driven transaction-manager="txManager" -->
-<!--                          proxy-target-class="true" -->
-<!--                          mode="proxy" -->
-<!--                          order="2" />-->
 
 
     <!--引入Bean-->
-    <bean id="twoBean"  class="tm.TwoBean"/>
+    <bean id="twoBean"  class="tm.TwoBean" />
+
+    <!--配置DAO-->
+    <bean id="personDAO"  class="dao.PersonDAO" />
+
+    <!--事务监听器-->
+    <bean id="oneTEL"  class="tm.OneTransactionEventListener" />
+
 
 </beans>
