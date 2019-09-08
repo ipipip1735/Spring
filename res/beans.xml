@@ -35,11 +35,14 @@
 
     <!--事务-->
     <!--    <import resource="tm.xml"/>-->
-        <import resource="tm_listener.xml"/>
+<!--        <import resource="tm_listener.xml"/>-->
     <!--    <import resource="tm_annatation.xml"/>-->
 
     <!--数据访问-->
     <!--    <import resource="dao.xml"/>-->
+
+    <!--数据绑定-->
+        <import resource="binder.xml"/>
 
 
 </beans>

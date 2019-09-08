@@ -1,11 +1,14 @@
 package mine;
 
+import bind.ABeanValidator;
 import dao.PersonDAO;
 import listen.OneApplicationEventPublisherAware;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.DataBinder;
 import tm.*;
 
 /**
@@ -59,8 +62,25 @@ public class Main {
 //        lifecyle();
 //        event();
 //        aop();
-        tm();
+//        tm();
 //        dao();
+        bind();
+    }
+
+    private void bind() {
+        ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+        bind.ABean aBean = context.getBean("aBean", bind.ABean.class);
+
+
+        DataBinder dataBinder = new DataBinder(aBean);
+        dataBinder.setValidator(new ABeanValidator());
+        dataBinder.validate();
+
+        BindingResult result = dataBinder.getBindingResult();
+        if (result.hasErrors()) {
+
+        }
+
     }
 
     private void template() {
