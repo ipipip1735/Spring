@@ -7,9 +7,9 @@ import org.springframework.validation.Validator;
 /**
  * Created by Administrator on 2019/9/8.
  */
-public class ABeanValidator implements Validator {
+public class PersoneValidator implements Validator {
 
-    public ABeanValidator() {
+    public PersoneValidator() {
         System.out.println("*********  " + getClass().getSimpleName() + ".Constructor  *********");
     }
 
@@ -22,7 +22,8 @@ public class ABeanValidator implements Validator {
         //返回true表示支持此对象验证，框架将调用validate()方法
         //返回false就表示不支持此对象的验证，框架将抛异常
 //        return bind.ABean.class.equals(clazz);
-        return bind.ABean.class.isAssignableFrom(clazz);//不需要equal()，只需要检查是否为父类
+//        return Person.class.isAssignableFrom(clazz);//不需要equal()，只需要检查是否为父类
+        return true;
     }
 
     @Override
@@ -31,11 +32,12 @@ public class ABeanValidator implements Validator {
         System.out.println("target is " + target);
         System.out.println("errors is " + errors);
 
-        ValidationUtils.rejectIfEmpty(errors, "name", "name is empty");
+        //方式一
+        ValidationUtils.rejectIfEmpty(errors, "name", "xxx", "YYY");
 
-        ABean aBean = (ABean) target;
-
-
+        //方式二
+//        Person person = (Person) target;
+//        if(person.name == null) errors.rejectValue("name", "xxx", "YYYY");
 
     }
 }

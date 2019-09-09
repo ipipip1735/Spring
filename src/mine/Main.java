@@ -1,14 +1,15 @@
 package mine;
 
-import bind.ABeanValidator;
+import bind.PersoneValidator;
+import bind.Person;
 import dao.PersonDAO;
-import listen.OneApplicationEventPublisherAware;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.DataBinder;
+import org.springframework.validation.FieldError;
 import tm.*;
 
 /**
@@ -68,19 +69,32 @@ public class Main {
     }
 
     private void bind() {
+
+//        validate();
+
+        convert();
+
+
+    }
+
+    private void convert() {
         ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
-        bind.ABean aBean = context.getBean("aBean", bind.ABean.class);
 
+    }
 
-        DataBinder dataBinder = new DataBinder(aBean);
-        dataBinder.setValidator(new ABeanValidator());
+    private void validate() {
+        ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+        Person person = context.getBean("person", Person.class);
+        DataBinder dataBinder = new DataBinder(person, "person");
+        dataBinder.setValidator(new PersoneValidator());
         dataBinder.validate();
+
 
         BindingResult result = dataBinder.getBindingResult();
         if (result.hasErrors()) {
-
+//            for (String m : result.resolveMessageCodes())
+//                System.out.println(m);
         }
-
     }
 
     private void template() {
