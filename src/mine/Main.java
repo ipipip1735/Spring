@@ -2,6 +2,8 @@ package mine;
 
 import bind.PersoneValidator;
 import bind.Person;
+import config.AConfig;
+import config.BConfig;
 import dao.PersonDAO;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -9,7 +11,6 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.DataBinder;
-import org.springframework.validation.FieldError;
 import tm.*;
 
 /**
@@ -21,15 +22,15 @@ public class Main {
 
         Main main = new Main();
 
-        main.xml();//基于XML的配置
-//        main.annotation();//基于Annotation的配置
+//        main.xml();//基于XML的配置
+        main.annotation();//基于Annotation的配置
 
 
     }
 
     private void annotation() {
-//        coreAnno();
-        tmAnno();
+        coreAnno();
+//        tmAnno();
 
     }
 
@@ -53,9 +54,17 @@ public class Main {
     }
 
     private void coreAnno() {
-        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(core.Configure.class);
-        applicationContext.getBean("aa");
 
+        //方式一：注解导入
+//        AnnotationConfigApplicationContext appContext = new AnnotationConfigApplicationContext(config.Configure.class);
+//        appContext.getBean("aa");
+//        appContext.getBean("car");
+
+        //方式二：编程式导入
+//        AnnotationConfigApplicationContext appContext = new AnnotationConfigApplicationContext();
+//        appContext.register(BConfig.class, AConfig.class);//等价于BConfig.class中使用@Import(AConfig.class)
+//        appContext.refresh();
+//        appContext.getBean("car");
     }
 
     private void xml() {
