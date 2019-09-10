@@ -9,10 +9,12 @@ import org.springframework.context.annotation.Profile;
  */
 @Configuration
 //@Profile("dev&one")
-@Profile("dev|one")
+//@Profile("dev|one")
 //@Profile({"dev", "one"})
 public class OneProfileConfig {
+
     @Bean
+    @Profile("dev")
     public OneBean oneBean() {
         System.out.println("~~" + getClass().getSimpleName() + ".oneBean~~");
         System.out.println(this);

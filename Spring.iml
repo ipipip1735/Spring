@@ -3,7 +3,7 @@
   <component name="FacetManager">
     <facet type="Spring" name="Spring">
       <configuration>
-        <fileset id="fileset" name="Spring Application Context" removed="false" profiles="dev,dev|one">
+        <fileset id="fileset" name="Spring Application Context" removed="false" profiles="dev">
           <file>file://$MODULE_DIR$/res/beans.xml</file>
           <file>file://$MODULE_DIR$/res/service.xml</file>
           <file>file://$MODULE_DIR$/res/ioc.xml</file>
