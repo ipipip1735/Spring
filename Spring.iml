@@ -3,7 +3,7 @@
   <component name="FacetManager">
     <facet type="Spring" name="Spring">
       <configuration>
-        <fileset id="fileset" name="Spring Application Context" removed="false">
+        <fileset id="fileset" name="Spring Application Context" removed="false" profiles="dev,dev|one">
           <file>file://$MODULE_DIR$/res/beans.xml</file>
           <file>file://$MODULE_DIR$/res/service.xml</file>
           <file>file://$MODULE_DIR$/res/ioc.xml</file>
@@ -12,11 +12,18 @@
           <file>file://$MODULE_DIR$/res/tm.xml</file>
           <file>file://$MODULE_DIR$/res/tm_annatation.xml</file>
           <file>file://$MODULE_DIR$/res/tm_template.xml</file>
-          <file>file://$MODULE_DIR$/src/core/Configure.java</file>
           <file>file://$MODULE_DIR$/src/tm/Configure.java</file>
           <file>file://$MODULE_DIR$/res/linstner.xml</file>
           <file>file://$MODULE_DIR$/res/dao.xml</file>
           <file>file://$MODULE_DIR$/res/tm_listener.xml</file>
+          <file>file://$MODULE_DIR$/src/config/AConfig.java</file>
+          <file>file://$MODULE_DIR$/src/config/BConfig.java</file>
+          <file>file://$MODULE_DIR$/src/config/Configure.java</file>
+          <file>file://$MODULE_DIR$/res/binder.xml</file>
+          <file>file://$MODULE_DIR$/src/config/ThreeConfig.java</file>
+          <file>file://$MODULE_DIR$/src/config/TwoConfig.java</file>
+          <file>file://$MODULE_DIR$/src/config/OneProfileConfig.java</file>
+          <file>file://$MODULE_DIR$/src/config/ProfileConfig.java</file>
         </fileset>
       </configuration>
     </facet>

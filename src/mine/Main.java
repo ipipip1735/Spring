@@ -29,8 +29,19 @@ public class Main {
     }
 
     private void annotation() {
-        coreAnno();
+//        coreAnno();
+        profileAnno();
 //        tmAnno();
+
+    }
+
+    private void profileAnno() {
+
+        AnnotationConfigApplicationContext appContext = new AnnotationConfigApplicationContext();
+        appContext.getEnvironment().setActiveProfiles("dev");//设置环境
+//        appContext.getEnvironment().setActiveProfiles("dev", "one");//逻辑与，而不是逻辑或
+        appContext.register(config.ProfileConfig.class, config.OneProfileConfig.class);
+        appContext.refresh();
 
     }
 
@@ -65,6 +76,7 @@ public class Main {
 //        appContext.register(BConfig.class, AConfig.class);//等价于BConfig.class中使用@Import(AConfig.class)
 //        appContext.refresh();
 //        appContext.getBean("car");
+
     }
 
     private void xml() {
