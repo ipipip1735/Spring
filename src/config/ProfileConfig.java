@@ -16,7 +16,6 @@ public class ProfileConfig {
     @Bean
     public TwoBean twoBean() {
         System.out.println("~~" + getClass().getSimpleName() + ".twoBean~~");
-        System.out.println(this);
         return new TwoBean();
     }
 
