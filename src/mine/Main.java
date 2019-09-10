@@ -38,9 +38,9 @@ public class Main {
     private void profileAnno() {
 
         AnnotationConfigApplicationContext appContext = new AnnotationConfigApplicationContext();
-        appContext.getEnvironment().setActiveProfiles("dev");//设置环境
+//        appContext.getEnvironment().setActiveProfiles("dev");//设置环境
 //        appContext.getEnvironment().setActiveProfiles("dev", "one");//逻辑与，而不是逻辑或
-        appContext.register(config.ProfileConfig.class, config.OneProfileConfig.class);
+        appContext.register(config.ProfileConfig.class, config.OneProfileConfig.class, config.ThreeConfig.class);
         appContext.refresh();
 
     }
