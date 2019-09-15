@@ -1,5 +1,6 @@
 package mine;
 
+import bind.Car;
 import bind.PersoneValidator;
 import bind.Person;
 import config.AConfig;
@@ -9,9 +10,12 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.DataBinder;
 import tm.*;
+
+import java.util.Date;
 
 /**
  * Created by Administrator on 2019/8/15 11:57.
@@ -22,8 +26,8 @@ public class Main {
 
         Main main = new Main();
 
-//        main.xml();//基于XML的配置
-        main.annotation();//基于Annotation的配置
+        main.xml();//基于XML的配置
+//        main.annotation();//基于Annotation的配置
 
 
     }
@@ -92,31 +96,44 @@ public class Main {
 
     private void bind() {
 
-//        validate();
 
-        convert();
+//        validate();//验证
+//        convert();//转换
+        formatter();
 
+
+    }
+
+    private void formatter() {
+        ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+
+        Car car = (Car) context.getBean("car");
+        car.setDate(new Date());
+        System.out.println(car.getDate());
 
     }
 
     private void convert() {
         ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 
+        ConversionService conversionService = (ConversionService) context.getBean("conversionService");
+        Car car = conversionService.convert("o", Car.class);
+        System.out.println(car);
+
+
     }
 
     private void validate() {
         ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
         Person person = context.getBean("person", Person.class);
-        DataBinder dataBinder = new DataBinder(person, "person");
+
+        DataBinder dataBinder = new DataBinder(person, "person");//设置要验证的对象
         dataBinder.setValidator(new PersoneValidator());
         dataBinder.validate();
 
 
-        BindingResult result = dataBinder.getBindingResult();
-        if (result.hasErrors()) {
-//            for (String m : result.resolveMessageCodes())
-//                System.out.println(m);
-        }
+        BindingResult result = dataBinder.getBindingResult(); //获取结果对象
+        if (result.hasErrors()) System.out.println("error!");
     }
 
     private void template() {
