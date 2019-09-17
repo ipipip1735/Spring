@@ -11,11 +11,17 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.convert.ConversionService;
+import org.springframework.format.datetime.DateFormatter;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.DataBinder;
 import tm.*;
 
+import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by Administrator on 2019/8/15 11:57.
@@ -107,9 +113,45 @@ public class Main {
     private void formatter() {
         ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 
-        Car car = (Car) context.getBean("car");
-        car.setDate(new Date());
-        System.out.println(car.getDate());
+//        Car car = (Car) context.getBean("car");
+//        car.setDate(new Date());
+//        System.out.println(car.getDate());
+
+//        String text = "201901";
+//        String pattern = "yyyyMM";
+
+
+
+        //Date 转 String
+//        Date date = new Date();
+//        DateFormatter dateFormatter = new DateFormatter();
+//        dateFormatter.setStylePattern("SS");
+//        dateFormatter.setStylePattern("MM");
+//        dateFormatter.setStylePattern("LL");
+//        dateFormatter.setStylePattern("FF");
+//        String d = dateFormatter.print(date, new Locale("zh_CN"));
+//        System.out.println(d);
+
+
+        //String 转 Date
+        try {
+            DateFormatter dateFormatter = new DateFormatter();
+            dateFormatter.setStylePattern("SS");
+            Date date = dateFormatter.parse("2019-09-17 16:40", new Locale("zh_CN"));
+
+            System.out.println(date);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+//        LocalDate anotherSummerDay = LocalDate.of(2016, 8, 23);
+//        System.out.println(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL).format(anotherSummerDay));
+//        System.out.println(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG).format(anotherSummerDay));
+//        System.out.println(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).format(anotherSummerDay));
+//        System.out.println(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT).format(anotherSummerDay));
+
 
     }
 
