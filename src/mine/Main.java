@@ -18,6 +18,8 @@ import tm.*;
 
 import java.text.ParseException;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.Date;
@@ -122,35 +124,49 @@ public class Main {
 
 
 
+        /**
+         * 使用DateFormatter
+         */
         //Date 转 String
-//        Date date = new Date();
-//        DateFormatter dateFormatter = new DateFormatter();
-//        dateFormatter.setStylePattern("SS");
+        Date date = new Date();
+        DateFormatter dateFormatter = new DateFormatter();
+        dateFormatter.setStylePattern("SS");
 //        dateFormatter.setStylePattern("MM");
 //        dateFormatter.setStylePattern("LL");
 //        dateFormatter.setStylePattern("FF");
-//        String d = dateFormatter.print(date, new Locale("zh_CN"));
-//        System.out.println(d);
+        String d = dateFormatter.print(date, new Locale("zh_CN"));
+        System.out.println(d);
 
 
         //String 转 Date
-        try {
-            DateFormatter dateFormatter = new DateFormatter();
-            dateFormatter.setStylePattern("SS");
-            Date date = dateFormatter.parse("2019-09-17 16:40", new Locale("zh_CN"));
+//        try {
+//            DateFormatter dateFormatter = new DateFormatter();
+//            dateFormatter.setStylePattern("SS");
+//            Date date = dateFormatter.parse("2019-09-17 16:40", new Locale("zh_CN"));
+//
+//            System.out.println(date);
+//
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
 
-            System.out.println(date);
 
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        /**
+         * 使用DateTimeFormatter
+         */
+        //日期转换
+//        LocalDate localDate = LocalDate.of(2016, 8, 23);
+//        System.out.println(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL).format(localDate));
+//        System.out.println(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG).format(localDate));
+//        System.out.println(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).format(localDate));
+//        System.out.println(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT).format(localDate));
 
+        //时间和日期转换
+//        ZonedDateTime zonedDateTime = ZonedDateTime.of(2019, 11, 11, 11, 11, 11, 11, ZoneId.of("+8"));
+//        String d = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT)
+//                .format(zonedDateTime);
+//        System.out.println(d);
 
-//        LocalDate anotherSummerDay = LocalDate.of(2016, 8, 23);
-//        System.out.println(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL).format(anotherSummerDay));
-//        System.out.println(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG).format(anotherSummerDay));
-//        System.out.println(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).format(anotherSummerDay));
-//        System.out.println(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT).format(anotherSummerDay));
 
 
     }
