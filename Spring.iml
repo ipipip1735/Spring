@@ -26,6 +26,7 @@
           <file>file://$MODULE_DIR$/src/config/TwoProfileConfig.java</file>
           <file>file://$MODULE_DIR$/src/config/ThreeConfig.java</file>
           <file>file://$MODULE_DIR$/src/config/ThreeProfileConfig.java</file>
+          <file>file://$MODULE_DIR$/src/config/FormatterConfig.java</file>
         </fileset>
       </configuration>
     </facet>

@@ -12,12 +12,15 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.convert.ConversionService;
+import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.format.datetime.DateFormatter;
 import org.springframework.format.datetime.joda.JodaTimeFormatterRegistrar;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.DataBinder;
 import tm.*;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -36,8 +39,8 @@ public class Main {
 
         Main main = new Main();
 
-        main.xml();//基于XML的配置
-//        main.annotation();//基于Annotation的配置
+//        main.xml();//基于XML的配置
+        main.annotation();//基于Annotation的配置
 
 
     }
@@ -54,10 +57,59 @@ public class Main {
         AnnotationConfigApplicationContext appContext = new AnnotationConfigApplicationContext(FormatterConfig.class);
         ConversionService conversionService = (ConversionService) appContext.getBean("conversionService");//获取格式化服务
 
-        if (conversionService.canConvert(String.class, Date.class)) {//判断是否能转换
-            Date date = conversionService.convert("19210203 12:12:12", Date.class);//转换String为Date
-            System.out.println(date);
+//        if (conversionService.canConvert(String.class, Date.class)) {//判断是否能转换
+//            Date date = conversionService.convert("19210203 12:12:12", Date.class);//转换String为Date
+//            System.out.println(date);
+//        }
+
+
+
+        //方法一
+        try {
+
+            Field field = Car.class.getField("date");
+            System.out.println(field);
+
+            TypeDescriptor target = new TypeDescriptor(field);
+            TypeDescriptor source = TypeDescriptor.forObject("20191213");
+            if (conversionService.canConvert(source, target)) {
+                System.out.println("ok");
+//                conversionService.convert(source, target);
+
+            }
+
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
         }
+
+
+        //方法二
+
+        //            field = Car.class.getField("date");
+//            System.out.println(field);
+//            TypeDescriptor target = new TypeDescriptor(field);
+
+
+//        Method method = null;
+//        try {
+//            method = Car.class.getMethod("setDate", Date.class);
+//        } catch (NoSuchMethodException e) {
+//            e.printStackTrace();
+//        }
+//        System.out.println(method);
+//
+//
+//
+//        TypeDescriptor target = new TypeDescriptor();
+//        TypeDescriptor source = TypeDescriptor.forObject("20191213");
+//        if (conversionService.canConvert(source, target)) {
+//            System.out.println("ok");
+//
+//        }
+
+
+
+
 
     }
 
@@ -140,7 +192,6 @@ public class Main {
             Date date = conversionService.convert("19210203", Date.class);//转换
             System.out.println(date);
         }
-
 
 
         /**

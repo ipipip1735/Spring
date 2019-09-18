@@ -12,8 +12,8 @@ public class Car {
     private String owner;
 
 //    @DateTimeFormat(iso= DateTimeFormat.ISO.DATE)
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private Date date;
+    @DateTimeFormat(pattern = "yyyMMdd")
+    public Date date;
 
     public void setDate(Date date) {
         this.date = date;
