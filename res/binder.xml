@@ -11,20 +11,56 @@
        http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
     <!--配置Bean-->
-    <bean id="person"  class="bind.Person" />
-    <bean id="car"  class="bind.Car" />
+    <bean id="person" class="bind.Person"/>
+    <bean id="car" class="bind.Car"/>
 
 
     <!--转换器-->
-<!--    <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">-->
-<!--        <property name="converters">-->
+    <!--    <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">-->
+    <!--        <property name="converters">-->
+    <!--            <set>-->
+    <!--                <bean class="bind.CarConverter"/>-->
+    <!--            </set>-->
+    <!--        </property>-->
+    <!--    </bean>-->
+
+    <!--格式化-->
+
+    <!--方式一：使用默认格式工具和转换工具-->
+<!--    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">-->
+<!--        <property name="formatters">-->
 <!--            <set>-->
-<!--                <bean class="bind.CarConverter"/>-->
+<!--                <bean class="org.springframework.format.datetime.DateFormatter">-->
+<!--                    <property name="pattern" value="yyyyMMdd"/>-->
+<!--                </bean>-->
 <!--            </set>-->
 <!--        </property>-->
 <!--    </bean>-->
 
-    <!--格式化-->
-    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean" />
+    <!--方式二：使用默认格式工具和转换工具-->
+    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <!--是否使用系统格式化工具-->
+        <property name="registerDefaultFormatters" value="false"/>
+
+        <!--如果禁用系统格式化工具需要手动根据需要增加格式化工具-->
+        <property name="formatters">
+            <set>
+                <bean class="org.springframework.format.number.NumberFormatAnnotationFormatterFactory"/>
+            </set>
+        </property>
+
+        <property name="formatterRegistrars">
+            <set>
+                <bean class="org.springframework.format.datetime.DateFormatterRegistrar">
+                    <property name="Formatter">
+                        <bean class="org.springframework.format.datetime.DateFormatter">
+                            <property name="pattern" value="yyyyMMdd"/>
+                        </bean>
+                    </property>
+                </bean>
+            </set>
+        </property>
+    </bean>
+
 
 </beans>

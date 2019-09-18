@@ -5,6 +5,7 @@ import bind.PersoneValidator;
 import bind.Person;
 import config.AConfig;
 import config.BConfig;
+import config.FormatterConfig;
 import dao.PersonDAO;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -12,6 +13,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.format.datetime.DateFormatter;
+import org.springframework.format.datetime.joda.JodaTimeFormatterRegistrar;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.DataBinder;
 import tm.*;
@@ -42,8 +44,20 @@ public class Main {
 
     private void annotation() {
 //        coreAnno();
-        profileAnno();
+//        profileAnno();
 //        tmAnno();
+        formatAnno();
+
+    }
+
+    private void formatAnno() {
+        AnnotationConfigApplicationContext appContext = new AnnotationConfigApplicationContext(FormatterConfig.class);
+        ConversionService conversionService = (ConversionService) appContext.getBean("conversionService");//获取格式化服务
+
+        if (conversionService.canConvert(String.class, Date.class)) {//判断是否能转换
+            Date date = conversionService.convert("19210203 12:12:12", Date.class);//转换String为Date
+            System.out.println(date);
+        }
 
     }
 
@@ -113,29 +127,34 @@ public class Main {
     }
 
     private void formatter() {
+
+        /**
+         * 自动转换
+         * 从Spring容器中取出服务对象完成转换
+         */
+
         ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 
-//        Car car = (Car) context.getBean("car");
-//        car.setDate(new Date());
-//        System.out.println(car.getDate());
-
-//        String text = "201901";
-//        String pattern = "yyyyMM";
+        ConversionService conversionService = (ConversionService) context.getBean("conversionService");
+        if (conversionService.canConvert(String.class, Date.class)) {//判断是否能转换
+            Date date = conversionService.convert("19210203", Date.class);//转换
+            System.out.println(date);
+        }
 
 
 
         /**
-         * 使用DateFormatter
+         * 使用DateFormatter手动转换
          */
         //Date 转 String
-        Date date = new Date();
-        DateFormatter dateFormatter = new DateFormatter();
-        dateFormatter.setStylePattern("SS");
-//        dateFormatter.setStylePattern("MM");
-//        dateFormatter.setStylePattern("LL");
-//        dateFormatter.setStylePattern("FF");
-        String d = dateFormatter.print(date, new Locale("zh_CN"));
-        System.out.println(d);
+//        Date date = new Date();
+//        DateFormatter dateFormatter = new DateFormatter();
+//        dateFormatter.setStylePattern("SS");
+////        dateFormatter.setStylePattern("MM");
+////        dateFormatter.setStylePattern("LL");
+////        dateFormatter.setStylePattern("FF");
+//        String d = dateFormatter.print(date, new Locale("zh_CN"));
+//        System.out.println(d);
 
 
         //String 转 Date
@@ -166,7 +185,6 @@ public class Main {
 //        String d = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT)
 //                .format(zonedDateTime);
 //        System.out.println(d);
-
 
 
     }
