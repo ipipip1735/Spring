@@ -12,13 +12,16 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.convert.ConversionService;
+import org.springframework.core.convert.Property;
 import org.springframework.core.convert.TypeDescriptor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.datetime.DateFormatter;
 import org.springframework.format.datetime.joda.JodaTimeFormatterRegistrar;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.DataBinder;
 import tm.*;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.text.ParseException;
@@ -57,58 +60,29 @@ public class Main {
         AnnotationConfigApplicationContext appContext = new AnnotationConfigApplicationContext(FormatterConfig.class);
         ConversionService conversionService = (ConversionService) appContext.getBean("conversionService");//获取格式化服务
 
-//        if (conversionService.canConvert(String.class, Date.class)) {//判断是否能转换
-//            Date date = conversionService.convert("19210203 12:12:12", Date.class);//转换String为Date
-//            System.out.println(date);
-//        }
-
-
-
-        //方法一
         try {
+            Class<?> objectType = Car.class;
+            Method readMethod = objectType.getMethod("getDate");
+            Method writeMethod = objectType.getMethod("setDate", Date.class);
+            String name = "date";
+            Property property = new Property(objectType, readMethod, writeMethod, name);
 
-            Field field = Car.class.getField("date");
-            System.out.println(field);
+            String birthday = "20191213";
 
-            TypeDescriptor target = new TypeDescriptor(field);
-            TypeDescriptor source = TypeDescriptor.forObject("20191213");
+            TypeDescriptor target = new TypeDescriptor(property);
+            TypeDescriptor source = TypeDescriptor.forObject(birthday);
+
             if (conversionService.canConvert(source, target)) {
                 System.out.println("ok");
-//                conversionService.convert(source, target);
-
+                Date date = (Date) conversionService.convert(birthday, source, target);
+                System.out.println(date);
             }
 
-        } catch (NoSuchFieldException e) {
+
+
+        } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
-
-
-        //方法二
-
-        //            field = Car.class.getField("date");
-//            System.out.println(field);
-//            TypeDescriptor target = new TypeDescriptor(field);
-
-
-//        Method method = null;
-//        try {
-//            method = Car.class.getMethod("setDate", Date.class);
-//        } catch (NoSuchMethodException e) {
-//            e.printStackTrace();
-//        }
-//        System.out.println(method);
-//
-//
-//
-//        TypeDescriptor target = new TypeDescriptor();
-//        TypeDescriptor source = TypeDescriptor.forObject("20191213");
-//        if (conversionService.canConvert(source, target)) {
-//            System.out.println("ok");
-//
-//        }
-
-
-
 
 
     }

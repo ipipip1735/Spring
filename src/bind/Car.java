@@ -12,13 +12,15 @@ public class Car {
     private String owner;
 
 //    @DateTimeFormat(iso= DateTimeFormat.ISO.DATE)
-    @DateTimeFormat(pattern = "yyyMMdd")
-    public Date date;
+    @DateTimeFormat(pattern = "yyyyMMdd")
+    Date date;
 
     public void setDate(Date date) {
         this.date = date;
     }
-
+    public Date getDate() {
+        return date;
+    }
 
     public void setPrice(int price) {
         this.price = price;
@@ -36,9 +38,7 @@ public class Car {
         return owner;
     }
 
-    public Date getDate() {
-        return date;
-    }
+
 
     public Car() {
         System.out.println("*********  " + getClass().getSimpleName() + ".Constructor  *********");

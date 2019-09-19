@@ -20,7 +20,7 @@ public class FormatterConfig {
 
         //方式一：使用默认格式工具和转换工具
         DefaultFormattingConversionService conversionService = new DefaultFormattingConversionService();
-        conversionService.addFormatter(new DateFormatter("yyyyMMdd HH:mm:ss"));
+//        conversionService.addFormatter(new DateFormatter("yyyyMMdd"));
 
 
 
