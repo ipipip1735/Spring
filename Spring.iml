@@ -27,6 +27,7 @@
           <file>file://$MODULE_DIR$/src/config/ThreeConfig.java</file>
           <file>file://$MODULE_DIR$/src/config/ThreeProfileConfig.java</file>
           <file>file://$MODULE_DIR$/src/config/FormatterConfig.java</file>
+          <file>file://$MODULE_DIR$/src/config/ValidatorConfig.java</file>
         </fileset>
       </configuration>
     </facet>
@@ -45,5 +46,10 @@
     <orderEntry type="library" name="org.springframework:spring-aspects:5.1.9.RELEASE" level="application" />
     <orderEntry type="library" name="org.springframework:spring-jdbc:5.1.9.RELEASE" level="application" />
     <orderEntry type="library" name="mysql:mysql-connector-java:8.0.17" level="application" />
+    <orderEntry type="library" name="javax.validation:validation-api:2.0.1.Final" level="application" />
+    <orderEntry type="library" name="javax.el:javax.el-api:3.0.0" level="application" />
+    <orderEntry type="library" name="javax.servlet.jsp:javax.servlet.jsp-api:2.3.1" level="application" />
+    <orderEntry type="library" name="org.glassfish:javax.el:3.0.0" level="application" />
+    <orderEntry type="library" name="org.hibernate:hibernate-validator:6.0.17.Final" level="application" />
   </component>
 </module>

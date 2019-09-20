@@ -38,29 +38,32 @@
 <!--    </bean>-->
 
     <!--方式二：使用默认格式工具和转换工具-->
-    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
-        <!--是否使用系统格式化工具-->
-        <property name="registerDefaultFormatters" value="false"/>
+<!--    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">-->
+<!--        &lt;!&ndash;是否使用系统格式化工具&ndash;&gt;-->
+<!--        <property name="registerDefaultFormatters" value="false"/>-->
 
-        <!--如果禁用系统格式化工具需要手动根据需要增加格式化工具-->
-        <property name="formatters">
-            <set>
-                <bean class="org.springframework.format.number.NumberFormatAnnotationFormatterFactory"/>
-            </set>
-        </property>
+<!--        &lt;!&ndash;如果禁用系统格式化工具需要手动根据需要增加格式化工具&ndash;&gt;-->
+<!--        <property name="formatters">-->
+<!--            <set>-->
+<!--                <bean class="org.springframework.format.number.NumberFormatAnnotationFormatterFactory"/>-->
+<!--            </set>-->
+<!--        </property>-->
 
-        <property name="formatterRegistrars">
-            <set>
-                <bean class="org.springframework.format.datetime.DateFormatterRegistrar">
-                    <property name="Formatter">
-                        <bean class="org.springframework.format.datetime.DateFormatter">
-                            <property name="pattern" value="yyyyMMdd"/>
-                        </bean>
-                    </property>
-                </bean>
-            </set>
-        </property>
-    </bean>
+<!--        <property name="formatterRegistrars">-->
+<!--            <set>-->
+<!--                <bean class="org.springframework.format.datetime.DateFormatterRegistrar">-->
+<!--                    <property name="Formatter">-->
+<!--                        <bean class="org.springframework.format.datetime.DateFormatter">-->
+<!--                            <property name="pattern" value="yyyyMMdd"/>-->
+<!--                        </bean>-->
+<!--                    </property>-->
+<!--                </bean>-->
+<!--            </set>-->
+<!--        </property>-->
+<!--    </bean>-->
+
+
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
 
 
 </beans>

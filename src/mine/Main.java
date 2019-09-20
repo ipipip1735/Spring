@@ -3,9 +3,11 @@ package mine;
 import bind.Car;
 import bind.PersoneValidator;
 import bind.Person;
+import bind.Teacher;
 import config.AConfig;
 import config.BConfig;
 import config.FormatterConfig;
+import config.ValidatorConfig;
 import dao.PersonDAO;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -17,8 +19,8 @@ import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.datetime.DateFormatter;
 import org.springframework.format.datetime.joda.JodaTimeFormatterRegistrar;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.DataBinder;
+import org.springframework.validation.*;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import tm.*;
 
 import java.lang.annotation.Annotation;
@@ -42,8 +44,8 @@ public class Main {
 
         Main main = new Main();
 
-//        main.xml();//基于XML的配置
-        main.annotation();//基于Annotation的配置
+        main.xml();//基于XML的配置
+//        main.annotation();//基于Annotation的配置
 
 
     }
@@ -52,7 +54,26 @@ public class Main {
 //        coreAnno();
 //        profileAnno();
 //        tmAnno();
-        formatAnno();
+//        formatAnno();
+        validateAnno();
+
+    }
+
+    private void validateAnno() {
+        AnnotationConfigApplicationContext appContext = new AnnotationConfigApplicationContext(ValidatorConfig.class);
+//        LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();
+
+//        System.out.println(validator.getValidator());
+
+//        validator.getValidator().validateProperty(Teacher.class, "age");
+
+
+//        Teacher teacher = new Teacher();
+//        DataBinder binder = new DataBinder(teacher);
+//        binder.setValidator();
+//        binder.validate();
+
+
 
     }
 
@@ -65,16 +86,15 @@ public class Main {
             Method readMethod = objectType.getMethod("getDate");
             Method writeMethod = objectType.getMethod("setDate", Date.class);
             String name = "date";
-            Property property = new Property(objectType, readMethod, writeMethod, name);
+            Property property = new Property(objectType, readMethod, writeMethod, name);//创建属性对象
 
             String birthday = "20191213";
 
-            TypeDescriptor target = new TypeDescriptor(property);
+            TypeDescriptor target = new TypeDescriptor(property);//创建标识符
             TypeDescriptor source = TypeDescriptor.forObject(birthday);
 
-            if (conversionService.canConvert(source, target)) {
-                System.out.println("ok");
-                Date date = (Date) conversionService.convert(birthday, source, target);
+            if (conversionService.canConvert(source, target)) {//判断是否能转换
+                Date date = (Date) conversionService.convert(birthday, source, target);//转换
                 System.out.println(date);
             }
 
@@ -145,9 +165,9 @@ public class Main {
     private void bind() {
 
 
-//        validate();//验证
+        validate();//验证
 //        convert();//转换
-        formatter();
+//        formatter();
 
 
     }
@@ -225,16 +245,43 @@ public class Main {
     }
 
     private void validate() {
+        //方式一
+//        ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+//        Person person = context.getBean("person", Person.class);
+//
+//        DataBinder dataBinder = new DataBinder(person, "person");//设置要验证的对象
+//        dataBinder.setValidator(new PersoneValidator());
+//        dataBinder.validate();
+//
+//
+//        BindingResult result = dataBinder.getBindingResult(); //获取结果对象
+//        if (result.hasErrors()) System.out.println("error!");
+
+
+        //方式二
         ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
-        Person person = context.getBean("person", Person.class);
+        Validator validator = (Validator) context.getBean("validator");
+//
+        Teacher teacher = new Teacher();
+        teacher.setAge(10);
 
-        DataBinder dataBinder = new DataBinder(person, "person");//设置要验证的对象
-        dataBinder.setValidator(new PersoneValidator());
-        dataBinder.validate();
+
+//        BindingResult bindingResult = new BeanPropertyBindingResult(teacher, "teacher");
+//        validator.validate(teacher, bindingResult);
+//        if(bindingResult.hasErrors()) System.out.println("error");
 
 
-        BindingResult result = dataBinder.getBindingResult(); //获取结果对象
-        if (result.hasErrors()) System.out.println("error!");
+        DataBinder dataBinder = new DataBinder(teacher, "teacher");
+//        dataBinder.setValidator(validator);
+//        dataBinder.addValidators(validator);
+//        dataBinder.validate();
+
+
+
+
+
+
+
     }
 
     private void template() {
