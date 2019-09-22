@@ -12,12 +12,12 @@ import javax.validation.Validator;
 @Configuration
 public class ValidatorConfig {
 
-//    @Bean
-//    public Validator localValidatorFactoryBean() {
-//        System.out.println("~~" + getClass().getSimpleName() + ".localValidatorFactoryBean~~");
-//
-//        LocalValidatorFactoryBean localValidatorFactoryBean = new LocalValidatorFactoryBean();
-//        return localValidatorFactoryBean;
-//    }
+    @Bean
+    public Validator validator() {
+        System.out.println("~~" + getClass().getSimpleName() + ".validator~~");
+
+        LocalValidatorFactoryBean localValidatorFactoryBean = new LocalValidatorFactoryBean();
+        return localValidatorFactoryBean;
+    }
 
 }

@@ -4,12 +4,15 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
+import java.util.Random;
+
 /**
  * Created by Administrator on 2019/9/8.
  */
 public class PersoneValidator implements Validator {
 
     public PersoneValidator() {
+        Random random = new Random();
         System.out.println("*********  " + getClass().getSimpleName() + ".Constructor  *********");
     }
 
@@ -33,7 +36,7 @@ public class PersoneValidator implements Validator {
         System.out.println("errors is " + errors);
 
         //方式一
-        ValidationUtils.rejectIfEmpty(errors, "name", "xxx", "YYY");
+//        ValidationUtils.rejectIfEmpty(errors, "name", "xxx", "YYY");
 
         //方式二
 //        Person person = (Person) target;

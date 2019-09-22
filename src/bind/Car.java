@@ -2,7 +2,9 @@ package bind;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.TimeZone;
 
 /**
  * Created by Administrator on 2019/9/9 17:53.
@@ -11,18 +13,35 @@ public class Car {
     private int price;
     private String owner;
 
-//    @DateTimeFormat(iso= DateTimeFormat.ISO.DATE)
+    //    @DateTimeFormat(iso= DateTimeFormat.ISO.DATE)
     @DateTimeFormat(pattern = "yyyyMMdd")
     Date date;
 
+
+    public void setLocalDate(LocalDate localDate) {
+        this.localDate = localDate;
+    }
+
+    public LocalDate getLocalDate() {
+        return localDate;
+    }
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    LocalDate localDate;
+
     public void setDate(Date date) {
+        System.out.println("~~" + getClass().getSimpleName() + ".setDate~~");
+        System.out.println(date.getClass());
         this.date = date;
     }
+
     public Date getDate() {
         return date;
     }
 
     public void setPrice(int price) {
+        System.out.println("~~" + getClass().getSimpleName() + ".setPrice~~");
+
         this.price = price;
     }
 
@@ -39,10 +58,11 @@ public class Car {
     }
 
 
-
     public Car() {
         System.out.println("*********  " + getClass().getSimpleName() + ".Constructor  *********");
         price = -1;
         owner = "xx";
     }
+
+
 }
