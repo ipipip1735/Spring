@@ -19,17 +19,24 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.convert.Property;
 import org.springframework.core.convert.TypeDescriptor;
+import org.springframework.core.io.DefaultResourceLoader;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.datetime.DateFormatter;
 import org.springframework.format.datetime.joda.JodaTimeFormatterRegistrar;
 import org.springframework.format.support.DefaultFormattingConversionService;
 import org.springframework.format.support.FormattingConversionService;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.validation.*;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import tm.*;
 
 import javax.validation.Valid;
+import java.beans.PropertyEditor;
+import java.beans.PropertyEditorSupport;
+import java.io.*;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -43,6 +50,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
  * Created by Administrator on 2019/8/15 11:57.
@@ -63,8 +72,78 @@ public class Main {
 //        coreAnno();
 //        profileAnno();
 //        tmAnno();
-        formatAnno();
+//        formatAnno();
 //        validateAnno();
+//        propertyEditorAnno();
+
+        resourceAnno();
+
+    }
+
+    private void resourceAnno() {
+
+        //基本使用
+//        ResourceLoader resourceLoader = new DefaultResourceLoader();
+//        Resource resource = resourceLoader.getResource("classpath:res");
+//
+//        if(resource.isFile()) System.out.println("isFile");
+//        if(resource.isOpen()) System.out.println("isOpen");
+//        if(resource.isReadable()) System.out.println("isReadable");
+//
+//
+//        try {
+//            System.out.println("contentLength is " + resource.contentLength());
+//            System.out.println("createRelative is " + resource.createRelative("classpath:res"));
+//
+//
+//            System.out.println("getURI is " + resource.getURI());
+//            System.out.println("getURL is " + resource.getURL());
+//            System.out.println("lastModified is " + resource.lastModified());
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+
+
+        //基本使用
+        ResourceLoader resourceLoader = new DefaultResourceLoader();
+        Resource resource = resourceLoader.getResource("classpath:res");
+        try(InputStream inputStream = resource.getInputStream();
+            Reader reader = new InputStreamReader(resource.getInputStream(), UTF_8)
+        ) {
+
+            String res = FileCopyUtils.copyToString(reader);
+            System.out.println(res);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void propertyEditorAnno() {
+
+        Car car = new Car();
+        DataBinder dataBinder = new DataBinder(car);
+
+        List<PropertyValue> list = new ArrayList<>();
+        list.add(new PropertyValue("date", "20191212"));
+        PropertyValues propertyValues = new MutablePropertyValues(list);
+
+
+        PropertyEditor datePropertyEditor = new PropertyEditorSupport() {
+            @Override
+            public void setAsText(String text) throws IllegalArgumentException {
+                System.out.println("text is " + text);
+                setValue(new Date());
+            }
+        };
+
+        dataBinder.registerCustomEditor(Date.class, datePropertyEditor);
+        dataBinder.bind(propertyValues);
+
+        System.out.println(car.getDate());
+
 
     }
 
@@ -81,7 +160,7 @@ public class Main {
         binder.setValidator(validator);//设置验证器
         binder.validate();
 
-        if(binder.getBindingResult().hasErrors()) System.out.println("Error!");
+        if (binder.getBindingResult().hasErrors()) System.out.println("Error!");
 
 
     }
@@ -139,10 +218,6 @@ public class Main {
         dataBinder.bind(propertyValues);
         System.out.println(car.getDate());
         System.out.println(car.getLocalDate());
-
-
-
-
 
 
     }
@@ -345,7 +420,7 @@ public class Main {
 
         BindingResult bindingResult = new BeanPropertyBindingResult(teacher, "teacher");
         validator.validate(teacher, bindingResult);
-        if(bindingResult.hasErrors()) System.out.println("error");
+        if (bindingResult.hasErrors()) System.out.println("error");
 
 
     }
