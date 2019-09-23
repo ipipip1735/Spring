@@ -4,10 +4,7 @@ import bind.Car;
 import bind.PersoneValidator;
 import bind.Person;
 import bind.Teacher;
-import config.AConfig;
-import config.BConfig;
-import config.FormatterConfig;
-import config.ValidatorConfig;
+import config.*;
 import dao.PersonDAO;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.PropertyValue;
@@ -19,9 +16,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.convert.Property;
 import org.springframework.core.convert.TypeDescriptor;
-import org.springframework.core.io.DefaultResourceLoader;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
+import org.springframework.core.io.*;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.datetime.DateFormatter;
 import org.springframework.format.datetime.joda.JodaTimeFormatterRegistrar;
@@ -31,7 +26,11 @@ import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.validation.*;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+import resouce.ABean;
 import tm.*;
+import tm.Configure;
+import tm.ThreeBean;
+import tm.TwoBean;
 
 import javax.validation.Valid;
 import java.beans.PropertyEditor;
@@ -40,6 +39,7 @@ import java.io.*;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.net.MalformedURLException;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -105,19 +105,44 @@ public class Main {
 //        }
 
 
-        //基本使用
-        ResourceLoader resourceLoader = new DefaultResourceLoader();
-        Resource resource = resourceLoader.getResource("classpath:res");
-        try(InputStream inputStream = resource.getInputStream();
-            Reader reader = new InputStreamReader(resource.getInputStream(), UTF_8)
-        ) {
 
-            String res = FileCopyUtils.copyToString(reader);
-            System.out.println(res);
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        Resource resource;
+
+//        //访问路径资源
+//        resource = new ClassPathResource("res");
+//        System.out.println(resource.isFile());
+//
+//        //系统资源(相对路径)
+//        resource = new FileSystemResource("res");
+//        System.out.println(resource.isFile());
+//
+//        //系统资源（绝对路径）
+//        resource = new FileSystemResource("E:\\Program\\IntelliJ\\Spring\\Spring\\res");
+//        System.out.println(resource.isFile());
+//
+//        //URL资源
+//        try {
+//            resource = new UrlResource("");
+//        } catch (MalformedURLException e) {
+//            e.printStackTrace();
+//        }
+
+
+
+        //加载资源
+//        ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+//        ABean aBean = (ABean) context.getBean("aBean");
+//        System.out.println(aBean.getTxt());
+
+
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ResouceConfig.class);
+        ABean aBean = (ABean) context.getBean("aBean");
+        System.out.println(aBean.getTxt());
+        System.out.println(aBean.getText());
+        System.out.println(aBean.resourceLoader);
+
+
 
     }
 
