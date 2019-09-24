@@ -5,7 +5,7 @@
 
 
     <bean id="annoB" class="core.AnnotationBean" init-method="init" destroy-method="destroy"/>
-<!--    <bean id="aw" class="core.AutowiredBean"/>-->
+<!--    <bean id="aw" class="autowired.AutowiredBean"/>-->
 <!--    <bean id="fB" class="core.FactoryBean"/>-->
 
 </beans>

@@ -1,10 +1,9 @@
 package mine;
 
 import bind.Car;
-import bind.PersoneValidator;
-import bind.Person;
 import bind.Teacher;
 import config.*;
+import autowired.AutowiredBean;
 import dao.PersonDAO;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.PropertyValue;
@@ -14,44 +13,17 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.convert.ConversionService;
-import org.springframework.core.convert.Property;
-import org.springframework.core.convert.TypeDescriptor;
-import org.springframework.core.io.*;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.datetime.DateFormatter;
-import org.springframework.format.datetime.joda.JodaTimeFormatterRegistrar;
 import org.springframework.format.support.DefaultFormattingConversionService;
-import org.springframework.format.support.FormattingConversionService;
-import org.springframework.ui.Model;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.validation.*;
-import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
-import resouce.ABean;
-import tm.*;
-import tm.Configure;
+import resource.ABean;
 import tm.ThreeBean;
 import tm.TwoBean;
 
-import javax.validation.Valid;
 import java.beans.PropertyEditor;
 import java.beans.PropertyEditorSupport;
-import java.io.*;
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.net.MalformedURLException;
-import java.text.ParseException;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
-
-import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
  * Created by Administrator on 2019/8/15 11:57.
@@ -69,7 +41,9 @@ public class Main {
     }
 
     private void annotation() {
+
 //        coreAnno();
+//        autowiredAnno();
 //        profileAnno();
 //        tmAnno();
 //        formatAnno();
@@ -77,6 +51,14 @@ public class Main {
 //        propertyEditorAnno();
 
         resourceAnno();
+
+    }
+
+    private void autowiredAnno() {
+        AnnotationConfigApplicationContext appContext = new AnnotationConfigApplicationContext(AutowiredConfig.class);
+        AutowiredBean autowiredBean = (AutowiredBean) appContext.getBean(AutowiredBean.class);
+        System.out.println(autowiredBean.one);
+        autowiredBean.one.show();
 
     }
 
@@ -105,8 +87,6 @@ public class Main {
 //        }
 
 
-
-
 //        Resource resource;
 
 //        //访问路径资源
@@ -129,19 +109,13 @@ public class Main {
 //        }
 
 
-
         //加载资源
-//        ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
-//        ABean aBean = (ABean) context.getBean("aBean");
-//        System.out.println(aBean.getTxt());
-
-
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ResouceConfig.class);
-        ABean aBean = (ABean) context.getBean("aBean");
-        System.out.println(aBean.getTxt());
-        System.out.println(aBean.getText());
+//        ABean aBean = (ABean) context.getBean("aBean");
+        ABean aBean = context.getBean(ABean.class);
+//        System.out.println(aBean.getTxt());
+//        System.out.println(aBean.getText());
         System.out.println(aBean.resourceLoader);
-
 
 
     }
@@ -289,6 +263,7 @@ public class Main {
 //        appContext.register(BConfig.class, AConfig.class);//等价于BConfig.class中使用@Import(AConfig.class)
 //        appContext.refresh();
 //        appContext.getBean("car");
+
 
     }
 
