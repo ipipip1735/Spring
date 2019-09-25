@@ -7,6 +7,10 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 
 /**
@@ -15,43 +19,40 @@ import javax.annotation.Resource;
 @Component("aBean")
 public class ABean {
 
-    @Resource(name = "drl")
-//    @Autowired
-//    @Qualifier("drl")
+    @Autowired
     public ResourceLoader resourceLoader;
 
-//    @Autowired
-//    public ABean(@Qualifier("drl") ResourceLoader resourceLoader) {
-//        System.out.println(resourceLoader);
-//        this.resourceLoader = resourceLoader;
-//    }
-    //    public ResourceLoader getResourceLoader() {
-//        return resourceLoader;
-//    }
+    String note = "";
 
-//    public void setResourceLoader(ResourceLoader resourceLoader) {
-//        System.out.println(resourceLoader);
-//        this.resourceLoader = resourceLoader;
-//    }
+    public String getNote() {
+
+        try {
+            Path path = resourceLoader.getResource("classpath:res")
+                    .getFile()
+                    .toPath();
+            return new String(Files.readAllBytes(path));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return note;
+    }
 
     @Autowired
     String text;
-
     public String getText() {
         return text;
     }
-
     public void setText(String text) {
         this.text = text;
     }
 
+
     @Value("res")
     String txt;
-
     public String getTxt() {
         return txt;
     }
-
     public void setTxt(String txt) {
         this.txt = txt;
     }

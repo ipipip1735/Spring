@@ -13,6 +13,8 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.convert.ConversionService;
+import org.springframework.core.io.DefaultResourceLoader;
+import org.springframework.core.io.Resource;
 import org.springframework.format.support.DefaultFormattingConversionService;
 import org.springframework.validation.*;
 import resource.ABean;
@@ -21,6 +23,8 @@ import tm.TwoBean;
 
 import java.beans.PropertyEditor;
 import java.beans.PropertyEditorSupport;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -115,7 +119,10 @@ public class Main {
         ABean aBean = context.getBean(ABean.class);
 //        System.out.println(aBean.getTxt());
 //        System.out.println(aBean.getText());
-        System.out.println(aBean.resourceLoader);
+        System.out.println(aBean.getNote());
+
+
+
 
 
     }
