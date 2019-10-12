@@ -16,6 +16,7 @@ import org.springframework.core.convert.ConversionService;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.format.support.DefaultFormattingConversionService;
+import org.springframework.util.AntPathMatcher;
 import org.springframework.validation.*;
 import resource.ABean;
 import tm.ThreeBean;
@@ -28,6 +29,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2019/8/15 11:57.
@@ -41,7 +43,6 @@ public class Main {
 //        main.xml();//基于XML的配置
         main.annotation();//基于Annotation的配置
 
-
     }
 
     private void annotation() {
@@ -54,7 +55,23 @@ public class Main {
 //        validateAnno();
 //        propertyEditorAnno();
 
-        resourceAnno();
+//        resourceAnno();
+
+        utility(); //Spring工具类
+
+    }
+
+    private void utility() {
+
+        //方式一
+        AntPathMatcher antPathMatcher = new AntPathMatcher();
+//        boolean b = antPathMatcher.match("org/springframework/**/*.jsp", "org/springframework/a/b/c/xx.jsp");
+        boolean b = antPathMatcher.match("com/{w+}.jsp", "com/test.jsp");
+        System.out.println(b);
+
+        //方式二
+        Map<String, String> map = antPathMatcher.extractUriTemplateVariables("com/{filename:\\w+}.jsp", "com/test.jsp");
+        System.out.println(map.get("filename"));
 
     }
 
