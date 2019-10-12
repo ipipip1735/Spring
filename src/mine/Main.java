@@ -63,15 +63,25 @@ public class Main {
 
     private void utility() {
 
-        //方式一
-        AntPathMatcher antPathMatcher = new AntPathMatcher();
-//        boolean b = antPathMatcher.match("org/springframework/**/*.jsp", "org/springframework/a/b/c/xx.jsp");
-        boolean b = antPathMatcher.match("com/{w+}.jsp", "com/test.jsp");
-        System.out.println(b);
+        //方式一：匹配路径
+//        AntPathMatcher antPathMatcher = new AntPathMatcher();
+////        boolean b = antPathMatcher.match("org/springframework/**/*.jsp", "org/springframework/a/b/c/xx.jsp");
+//        boolean b = antPathMatcher.match("com/{w+}.jsp", "com/test.jsp");
+//        System.out.println(b);
 
-        //方式二
-        Map<String, String> map = antPathMatcher.extractUriTemplateVariables("com/{filename:\\w+}.jsp", "com/test.jsp");
-        System.out.println(map.get("filename"));
+        //方式二：使用模板变量
+        AntPathMatcher antPathMatcher = new AntPathMatcher();
+//        Map<String, String> map = antPathMatcher.extractUriTemplateVariables("com/{filename:\\w+}.jsp", "com/test.jsp");
+        Map<String, String> map = antPathMatcher.extractUriTemplateVariables("com/{xx}.jsp", "com/test.jsp");
+        System.out.println(map);
+
+
+        //方式三：抽取路径
+//        AntPathMatcher antPathMatcher = new AntPathMatcher();
+//        String path = antPathMatcher.extractPathWithinPattern("/docs/*", "/docs/cvs/commit");
+//        System.out.println(path);
+
+
 
     }
 
