@@ -42,10 +42,13 @@
     <!--    <import resource="dao.xml"/>-->
 
     <!--数据绑定-->
-        <import resource="binder.xml"/>
+<!--        <import resource="binder.xml"/>-->
 
     <!--资源加载-->
-        <import resource="resouce.xml"/>
+<!--        <import resource="resouce.xml"/>-->
+
+    <!--资源加载-->
+        <import resource="i18n.xml"/>
 
 
 </beans>

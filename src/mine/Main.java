@@ -5,11 +5,15 @@ import bind.Teacher;
 import config.*;
 import autowired.AutowiredBean;
 import dao.PersonDAO;
+import i18n.OneBean;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.PropertyValue;
 import org.springframework.beans.PropertyValues;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.convert.ConversionService;
@@ -28,6 +32,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by Administrator on 2019/8/15 11:57.
@@ -38,9 +43,8 @@ public class Main {
 
         Main main = new Main();
 
-//        main.xml();//基于XML的配置
-        main.annotation();//基于Annotation的配置
-
+        main.xml();//基于XML的配置
+//        main.annotation();//基于Annotation的配置
 
     }
 
@@ -120,9 +124,6 @@ public class Main {
 //        System.out.println(aBean.getTxt());
 //        System.out.println(aBean.getText());
         System.out.println(aBean.getNote());
-
-
-
 
 
     }
@@ -281,7 +282,21 @@ public class Main {
 //        aop();
 //        tm();
 //        dao();
-        bind();
+//        bind();
+        i18n();
+    }
+
+    private void i18n() {
+
+        //方式一
+//        MessageSource messageSource = new ClassPathXmlApplicationContext("beans.xml");
+//        String message = messageSource.getMessage("msg", null, "default", Locale.CHINA);
+//        System.out.println(message);
+
+        ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+        OneBean oneBean = (OneBean) context.getBean("oneBean");
+        oneBean.show();
+
     }
 
     private void bind() {
