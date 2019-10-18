@@ -43,8 +43,8 @@ public class Main {
 
         Main main = new Main();
 
-        main.xml();//基于XML的配置
-//        main.annotation();//基于Annotation的配置
+//        main.xml();//基于XML的配置
+        main.annotation();//基于Annotation的配置
 
     }
 
@@ -57,8 +57,19 @@ public class Main {
 //        formatAnno();
 //        validateAnno();
 //        propertyEditorAnno();
+        i18nAnno();
 
-        resourceAnno();
+//        resourceAnno();
+
+    }
+
+    private void i18nAnno() {
+
+        AnnotationConfigApplicationContext appContext = new AnnotationConfigApplicationContext(MessageSourceConfig.class);
+        String msg = appContext.getMessage("msg", new Object[]{"one"}, "ooo", Locale.CHINA);
+        System.out.println(msg);
+
+
 
     }
 
@@ -283,16 +294,17 @@ public class Main {
 //        tm();
 //        dao();
 //        bind();
-        i18n();
+//        i18n();
     }
 
     private void i18n() {
 
         //方式一
 //        MessageSource messageSource = new ClassPathXmlApplicationContext("beans.xml");
-//        String message = messageSource.getMessage("msg", null, "default", Locale.CHINA);
+//        String message = messageSource.getMessage("msg", new Object[]{"one", "two"}, "ooo", Locale.CHINA);
 //        System.out.println(message);
 
+        //方式二：
         ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
         OneBean oneBean = (OneBean) context.getBean("oneBean");
         oneBean.show();
