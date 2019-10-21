@@ -29,6 +29,8 @@ import org.springframework.util.Assert;
 import org.springframework.util.MimeTypeUtils;
 import org.springframework.validation.*;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.ExchangeStrategies;
+import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.UriComponentsBuilder;
 import resource.ABean;
 import tm.ThreeBean;
@@ -65,11 +67,10 @@ public class Main {
 
         ExchangeStrategies strategies = ExchangeStrategies.builder()
                 .codecs(configurer -> {
-                    // ...
                 })
                 .build();
 
-        WebClient client = WebClient.builder()
+        WebClient client = WebClient.builder();
 //                .exchangeStrategies(strategies)
 //                .build();
 
