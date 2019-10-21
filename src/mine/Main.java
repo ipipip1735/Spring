@@ -20,7 +20,16 @@ import org.springframework.core.convert.ConversionService;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.format.support.DefaultFormattingConversionService;
+import org.springframework.http.*;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.http.converter.HttpMessageNotWritableException;
+import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.util.Assert;
+import org.springframework.util.MimeTypeUtils;
 import org.springframework.validation.*;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 import resource.ABean;
 import tm.ThreeBean;
 import tm.TwoBean;
@@ -29,10 +38,10 @@ import java.beans.PropertyEditor;
 import java.beans.PropertyEditorSupport;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
+import java.net.URI;
+import java.util.*;
+
+import static org.springframework.util.MimeTypeUtils.ALL_VALUE;
 
 /**
  * Created by Administrator on 2019/8/15 11:57.
@@ -44,7 +53,128 @@ public class Main {
         Main main = new Main();
 
 //        main.xml();//基于XML的配置
-        main.annotation();//基于Annotation的配置
+//        main.annotation();//基于Annotation的配置
+
+
+//        main.restTemplator();
+
+        main.webClient();
+    }
+
+    private void webClient() {
+
+        ExchangeStrategies strategies = ExchangeStrategies.builder()
+                .codecs(configurer -> {
+                    // ...
+                })
+                .build();
+
+        WebClient client = WebClient.builder()
+//                .exchangeStrategies(strategies)
+//                .build();
+
+    }
+
+    private void restTemplator() {
+//        restGET();
+//        restExchange();
+
+
+
+
+
+    }
+
+    private void restExchange() {
+
+
+        String uriTemplate = "http://localhost:8080/restapi";
+        URI uri = UriComponentsBuilder.fromUriString(uriTemplate)
+                .build(42);
+
+        RequestEntity<Void> requestEntity = RequestEntity.get(uri)
+                .header("one","1111")
+                .build();
+
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<String> response = restTemplate.exchange(requestEntity, String.class);
+
+        String responseHeader = response.getHeaders().getFirst("two");
+        System.out.println("head-two is " + responseHeader);
+
+        String body = response.getBody();
+        System.out.println("body is " + body);
+
+
+
+
+
+    }
+
+    private void restGET() {
+
+        //方式一：使用自定义转换器
+//        HttpMessageConverter<String> httpMessageConverter = new HttpMessageConverter<String>() {
+//            @Override
+//            public boolean canRead(Class<?> clazz, MediaType mediaType) {
+//                System.out.println("~~" + getClass().getSimpleName() + ".canRead~~");
+//                System.out.println("clazz is " + clazz);
+//                System.out.println("mediaType is " + mediaType);
+//                return true;
+//            }
+//
+//            @Override
+//            public boolean canWrite(Class<?> clazz, MediaType mediaType) {
+//                System.out.println("~~" + getClass().getSimpleName() + ".canWrite~~");
+//                System.out.println("clazz is " + clazz);
+//                System.out.println("mediaType is " + mediaType);
+//
+//                return true;
+//            }
+//
+//            @Override
+//            public List<MediaType> getSupportedMediaTypes() {
+//                System.out.println("~~" + getClass().getSimpleName() + ".MediaType~~");
+//
+//                return  Arrays.asList(MediaType.ALL);
+//            }
+//
+//            @Override
+//            public String read(Class<? extends String> clazz, HttpInputMessage inputMessage) throws IOException, HttpMessageNotReadableException {
+//                System.out.println("~~" + getClass().getSimpleName() + ".read~~");
+//
+//                System.out.println("clazz is " + clazz);
+//                System.out.println("inputMessage is " + inputMessage);
+//
+//                byte[] bytes = inputMessage.getBody().readAllBytes();
+////                String r = new String(bytes, "ISO-8859-1");
+//                String r = new String(bytes);
+//
+//                return r;
+//            }
+//
+//            @Override
+//            public void write(String s, MediaType contentType, HttpOutputMessage outputMessage) throws IOException, HttpMessageNotWritableException {
+//                System.out.println("~~" + getClass().getSimpleName() + ".write~~");
+//
+//                System.out.println("s is " + s);
+//                System.out.println("contentType is " + contentType);
+//                System.out.println("outputMessage is " + outputMessage);
+//            }
+//        };
+//        RestTemplate restTemplate = new RestTemplate(Arrays.asList(httpMessageConverter));
+//        String url = "http://localhost:8080/restapi";
+//        String result = restTemplate.getForObject(url, String.class);
+//        System.out.println("result is " + result);
+
+
+        //方式二：使用Spring自带转换器
+        RestTemplate restTemplate = new RestTemplate();
+//        restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
+
+        String url = "http://localhost:8080/restapi";
+        String result = restTemplate.getForObject(url, String.class);
+        System.out.println("result is " + result);
 
     }
 
@@ -57,7 +187,7 @@ public class Main {
 //        formatAnno();
 //        validateAnno();
 //        propertyEditorAnno();
-        i18nAnno();
+//        i18nAnno();
 
 //        resourceAnno();
 
@@ -68,7 +198,6 @@ public class Main {
         AnnotationConfigApplicationContext appContext = new AnnotationConfigApplicationContext(MessageSourceConfig.class);
         String msg = appContext.getMessage("msg", new Object[]{"one"}, "ooo", Locale.CHINA);
         System.out.println(msg);
-
 
 
     }
