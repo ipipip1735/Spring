@@ -70,7 +70,7 @@ public class Main {
                 })
                 .build();
 
-        WebClient client = WebClient.builder();
+//        WebClient client = WebClient.builder();
 //                .exchangeStrategies(strategies)
 //                .build();
 
