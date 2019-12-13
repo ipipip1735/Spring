@@ -4,6 +4,7 @@ import bind.Car;
 import bind.Teacher;
 import config.*;
 import autowired.AutowiredBean;
+import core.AsyncBean;
 import dao.PersonDAO;
 import i18n.OneBean;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -55,12 +56,12 @@ public class Main {
         Main main = new Main();
 
 //        main.xml();//基于XML的配置
-//        main.annotation();//基于Annotation的配置
+        main.annotation();//基于Annotation的配置
 
 
 //        main.restTemplator();
 
-        main.webClient();
+//        main.webClient();
     }
 
     private void webClient() {
@@ -70,9 +71,9 @@ public class Main {
                 })
                 .build();
 
-//        WebClient client = WebClient.builder();
-//                .exchangeStrategies(strategies)
-//                .build();
+        WebClient client = WebClient.builder()
+                .exchangeStrategies(strategies)
+                .build();
 
     }
 
@@ -191,6 +192,7 @@ public class Main {
 //        i18nAnno();
 
 //        resourceAnno();
+        async();//异步任务
 
     }
 
@@ -414,6 +416,18 @@ public class Main {
 //        appContext.getBean("car");
 
 
+    }
+
+    private void async() {
+        System.out.println("main|saync start");
+        AnnotationConfigApplicationContext appContext =
+                new AnnotationConfigApplicationContext(config.AsyncConfig.class);
+        AsyncBean asyncBean = appContext.getBean(AsyncBean.class);
+
+        System.out.println(Thread.currentThread());
+//        asyncBean.async();
+        asyncBean.asyncWithResult();
+        System.out.println("main|saync end");
     }
 
     private void xml() {
