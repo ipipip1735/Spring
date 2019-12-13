@@ -28,6 +28,8 @@ import org.springframework.http.converter.HttpMessageNotWritableException;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.util.Assert;
 import org.springframework.util.MimeTypeUtils;
+import org.springframework.util.concurrent.ListenableFuture;
+import org.springframework.util.concurrent.ListenableFutureCallback;
 import org.springframework.validation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.ExchangeStrategies;
@@ -43,6 +45,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.util.*;
+import java.util.concurrent.ExecutionException;
 
 import static org.springframework.util.MimeTypeUtils.ALL_VALUE;
 
@@ -82,9 +85,6 @@ public class Main {
 //        restExchange();
 
 
-
-
-
     }
 
     private void restExchange() {
@@ -95,7 +95,7 @@ public class Main {
                 .build(42);
 
         RequestEntity<Void> requestEntity = RequestEntity.get(uri)
-                .header("one","1111")
+                .header("one", "1111")
                 .build();
 
         RestTemplate restTemplate = new RestTemplate();
@@ -106,9 +106,6 @@ public class Main {
 
         String body = response.getBody();
         System.out.println("body is " + body);
-
-
-
 
 
     }
@@ -419,15 +416,69 @@ public class Main {
     }
 
     private void async() {
+
+        //方式一：使用无返回值@Async方法
+//        System.out.println("main|saync start");
+//        AnnotationConfigApplicationContext appContext =
+//                new AnnotationConfigApplicationContext(config.AsyncConfig.class);
+//        AsyncBean asyncBean = appContext.getBean(AsyncBean.class);
+//
+//        System.out.println(Thread.currentThread());
+//        asyncBean.async(); //无返回值
+//        System.out.println("main|saync end");
+
+
+        //方式二：使用AsyncResult对象
+//        System.out.println("main|saync start");
+//        AnnotationConfigApplicationContext appContext =
+//                new AnnotationConfigApplicationContext(config.AsyncConfig.class);
+//        AsyncBean asyncBean = appContext.getBean(AsyncBean.class);
+//
+//        System.out.println(Thread.currentThread());
+//
+//        ListenableFuture<String> listenableFuture = asyncBean
+//                .asyncWithResult();
+//
+//        System.out.println(listenableFuture);
+//
+//        listenableFuture.addCallback(new ListenableFutureCallback<>() {
+//            @Override
+//            public void onFailure(Throwable ex) {
+//                System.out.println("~~onFailure~~");
+//                System.out.println(Thread.currentThread());
+//            }
+//
+//            @Override
+//            public void onSuccess(String result) {
+//                System.out.println("~~onSuccess~~");
+//                System.out.println(Thread.currentThread());
+//
+//            }
+//        });
+//
+//        System.out.println("main|saync end");
+
+
+        //方式三：使用使用ListenableFutureTask对象
         System.out.println("main|saync start");
         AnnotationConfigApplicationContext appContext =
                 new AnnotationConfigApplicationContext(config.AsyncConfig.class);
         AsyncBean asyncBean = appContext.getBean(AsyncBean.class);
 
         System.out.println(Thread.currentThread());
-//        asyncBean.async();
-        asyncBean.asyncWithResult();
-        System.out.println("main|saync end");
+
+        ListenableFuture<String> listenableFuture = asyncBean.asyncWithTask();
+
+
+//        System.out.println(listenableFuture);
+//
+//        listenableFuture.completable().thenRun(()->{
+//            System.out.println("completed!");
+//        });
+//
+//        System.out.println("main|saync end");
+
+
     }
 
     private void xml() {
