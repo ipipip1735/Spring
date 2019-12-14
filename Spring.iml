@@ -33,6 +33,7 @@
           <file>file://$MODULE_DIR$/src/config/AutowiredConfig.java</file>
           <file>file://$MODULE_DIR$/res/i18n.xml</file>
           <file>file://$MODULE_DIR$/src/config/MessageSourceConfig.java</file>
+          <file>file://$MODULE_DIR$/src/config/AsyncConfig.java</file>
         </fileset>
       </configuration>
     </facet>
@@ -54,11 +55,11 @@
     <orderEntry type="library" name="org.hibernate:hibernate-validator:6.0.17.Final" level="application" />
     <orderEntry type="library" name="org.glassfish:javax.el:3.0.0" level="application" />
     <orderEntry type="library" name="commons-fileupload:commons-fileupload:1.4" level="application" />
-    <orderEntry type="library" name="org.springframework:spring-jdbc:5.2.0.RELEASE" level="application" />
     <orderEntry type="library" name="org.springframework:spring-webflux:5.2.0.RELEASE" level="application" />
     <orderEntry type="library" name="org.springframework:spring-webmvc:5.2.0.RELEASE" level="application" />
     <orderEntry type="library" name="org.springframework:spring-context:5.2.0.RELEASE" level="application" />
     <orderEntry type="library" name="org.springframework:spring-aspects:5.2.0.RELEASE" level="application" />
     <orderEntry type="library" name="org.springframework:spring-web:5.2.0.RELEASE" level="application" />
+    <orderEntry type="library" name="org.springframework:spring-jdbc:5.2.0.RELEASE" level="application" />
   </component>
 </module>

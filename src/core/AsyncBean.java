@@ -1,15 +1,19 @@
 package core;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.util.concurrent.ListenableFutureCallback;
 import org.springframework.util.concurrent.ListenableFutureTask;
 
+import java.util.concurrent.Executor;
+
 /**
  * Created by Administrator on 2019/12/13 4:27.
  */
 public class AsyncBean {
+
 
     @Async
     public void async() {
@@ -42,9 +46,7 @@ public class AsyncBean {
     @Async
     public ListenableFutureTask<String> asyncWithTask() {
 
-
-
-        return new ListenableFutureTask<String>(() -> {
+        ListenableFutureTask<String> task = new ListenableFutureTask(() -> {
             System.out.println("async start");
             try {
                 Thread.sleep(3000L);
@@ -56,5 +58,8 @@ public class AsyncBean {
             System.out.println("async end");
             return "OK";
         });
+
+        task.run();
+        return task;
     }
 }

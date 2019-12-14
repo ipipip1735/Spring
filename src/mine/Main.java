@@ -46,6 +46,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executor;
 
 import static org.springframework.util.MimeTypeUtils.ALL_VALUE;
 
@@ -417,7 +418,7 @@ public class Main {
 
     private void async() {
 
-        //方式一：使用无返回值@Async方法
+        //方式一：@Async方法最简使用
 //        System.out.println("main|saync start");
 //        AnnotationConfigApplicationContext appContext =
 //                new AnnotationConfigApplicationContext(config.AsyncConfig.class);
@@ -428,10 +429,9 @@ public class Main {
 //        System.out.println("main|saync end");
 
 
-        //方式二：使用AsyncResult对象
+        //方式二：@Async方法返回AsyncResult对象
 //        System.out.println("main|saync start");
-//        AnnotationConfigApplicationContext appContext =
-//                new AnnotationConfigApplicationContext(config.AsyncConfig.class);
+//        AnnotationConfigApplicationContext appContext = new AnnotationConfigApplicationContext(config.AsyncConfig.class);
 //        AsyncBean asyncBean = appContext.getBean(AsyncBean.class);
 //
 //        System.out.println(Thread.currentThread());
@@ -459,7 +459,7 @@ public class Main {
 //        System.out.println("main|saync end");
 
 
-        //方式三：使用使用ListenableFutureTask对象
+        //方式三：@Async方法返回ListenableFutureTask对象
         System.out.println("main|saync start");
         AnnotationConfigApplicationContext appContext =
                 new AnnotationConfigApplicationContext(config.AsyncConfig.class);
@@ -469,14 +469,14 @@ public class Main {
 
         ListenableFuture<String> listenableFuture = asyncBean.asyncWithTask();
 
+        System.out.println(listenableFuture);
 
-//        System.out.println(listenableFuture);
-//
-//        listenableFuture.completable().thenRun(()->{
-//            System.out.println("completed!");
-//        });
-//
-//        System.out.println("main|saync end");
+        listenableFuture.addCallback(result -> {
+            System.out.println("~~callback~~");
+            System.out.println("result is " + result);
+        }, Throwable::printStackTrace);
+
+        System.out.println("main|saync end");
 
 
     }
