@@ -1,33 +1,24 @@
 package mine;
 
+import async.ScheduleBean;
 import bind.Car;
 import bind.Teacher;
 import config.*;
 import autowired.AutowiredBean;
-import core.AsyncBean;
+import async.AsyncBean;
 import dao.PersonDAO;
 import i18n.OneBean;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.PropertyValue;
 import org.springframework.beans.PropertyValues;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.convert.ConversionService;
-import org.springframework.core.io.DefaultResourceLoader;
-import org.springframework.core.io.Resource;
+import org.springframework.core.task.TaskExecutor;
 import org.springframework.format.support.DefaultFormattingConversionService;
 import org.springframework.http.*;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.HttpMessageNotReadableException;
-import org.springframework.http.converter.HttpMessageNotWritableException;
-import org.springframework.http.converter.StringHttpMessageConverter;
-import org.springframework.util.Assert;
-import org.springframework.util.MimeTypeUtils;
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.util.concurrent.ListenableFutureCallback;
 import org.springframework.validation.*;
@@ -41,13 +32,8 @@ import tm.TwoBean;
 
 import java.beans.PropertyEditor;
 import java.beans.PropertyEditorSupport;
-import java.io.File;
-import java.io.IOException;
 import java.net.URI;
 import java.util.*;
-import java.util.concurrent.ExecutionException;
-
-import static org.springframework.util.MimeTypeUtils.ALL_VALUE;
 
 /**
  * Created by Administrator on 2019/8/15 11:57.
@@ -189,7 +175,18 @@ public class Main {
 //        i18nAnno();
 
 //        resourceAnno();
-        async();//异步任务
+//        taskExecutor();//异步任务
+        taskScheduler();//定时器
+
+    }
+
+    private void taskScheduler() {
+
+        AnnotationConfigApplicationContext appContext =
+                new AnnotationConfigApplicationContext(config.ScheduleConfig.class);
+        ScheduleBean scheduleBean = appContext.getBean(ScheduleBean.class);
+
+        scheduleBean.scheduling();
 
     }
 
@@ -415,9 +412,9 @@ public class Main {
 
     }
 
-    private void async() {
+    private void taskExecutor() {
 
-        //方式一：使用无返回值@Async方法
+        //方式一：使用@Async方法，无返回值
 //        System.out.println("main|saync start");
 //        AnnotationConfigApplicationContext appContext =
 //                new AnnotationConfigApplicationContext(config.AsyncConfig.class);
@@ -428,7 +425,39 @@ public class Main {
 //        System.out.println("main|saync end");
 
 
-        //方式二：使用AsyncResult对象
+        //方式二：使用@Async方法，返回AsyncResult对象
+        System.out.println("main|saync start");
+        AnnotationConfigApplicationContext appContext = new AnnotationConfigApplicationContext(config.AsyncConfig.class);
+        AsyncBean asyncBean = appContext.getBean(AsyncBean.class);
+
+
+        System.out.println(Thread.currentThread());
+
+        ListenableFuture<String> listenableFuture = asyncBean.asyncWithResult();
+
+        System.out.println(listenableFuture);
+
+        listenableFuture.addCallback(new ListenableFutureCallback<>() {
+            @Override
+            public void onFailure(Throwable ex) {
+                System.out.println("~~onFailure~~");
+                System.out.println(Thread.currentThread());
+            }
+
+            @Override
+            public void onSuccess(String result) {
+                System.out.println("~~onSuccess~~");
+                System.out.println(Thread.currentThread());
+
+                TaskExecutor asyncBean = appContext.getBean(TaskExecutor.class);
+
+            }
+        });
+
+        System.out.println("main|saync end");
+
+
+        //方式三：使用@Async方法，返回ListenableFutureTask对象
 //        System.out.println("main|saync start");
 //        AnnotationConfigApplicationContext appContext =
 //                new AnnotationConfigApplicationContext(config.AsyncConfig.class);
@@ -436,45 +465,14 @@ public class Main {
 //
 //        System.out.println(Thread.currentThread());
 //
-//        ListenableFuture<String> listenableFuture = asyncBean
-//                .asyncWithResult();
+//        ListenableFuture<String> listenableFuture = asyncBean.asyncWithTask();
 //
 //        System.out.println(listenableFuture);
 //
-//        listenableFuture.addCallback(new ListenableFutureCallback<>() {
-//            @Override
-//            public void onFailure(Throwable ex) {
-//                System.out.println("~~onFailure~~");
-//                System.out.println(Thread.currentThread());
-//            }
-//
-//            @Override
-//            public void onSuccess(String result) {
-//                System.out.println("~~onSuccess~~");
-//                System.out.println(Thread.currentThread());
-//
-//            }
-//        });
-//
-//        System.out.println("main|saync end");
-
-
-        //方式三：使用使用ListenableFutureTask对象
-        System.out.println("main|saync start");
-        AnnotationConfigApplicationContext appContext =
-                new AnnotationConfigApplicationContext(config.AsyncConfig.class);
-        AsyncBean asyncBean = appContext.getBean(AsyncBean.class);
-
-        System.out.println(Thread.currentThread());
-
-        ListenableFuture<String> listenableFuture = asyncBean.asyncWithTask();
-
-
-//        System.out.println(listenableFuture);
-//
-//        listenableFuture.completable().thenRun(()->{
-//            System.out.println("completed!");
-//        });
+//        listenableFuture.completable()
+//                .thenRun(() -> {
+//                    System.out.println("completed!");
+//                });
 //
 //        System.out.println("main|saync end");
 

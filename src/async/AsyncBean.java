@@ -1,4 +1,4 @@
-package core;
+package async;
 
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
@@ -24,6 +24,7 @@ public class AsyncBean {
     }
 
     @Async
+//    @Async("te")
     public ListenableFuture<String> asyncWithResult() {
         System.out.println("async start");
 
@@ -42,9 +43,7 @@ public class AsyncBean {
     @Async
     public ListenableFutureTask<String> asyncWithTask() {
 
-
-
-        return new ListenableFutureTask<String>(() -> {
+        ListenableFutureTask<String> task = new ListenableFutureTask<>(() -> {
             System.out.println("async start");
             try {
                 Thread.sleep(3000L);
@@ -56,5 +55,7 @@ public class AsyncBean {
             System.out.println("async end");
             return "OK";
         });
+        task.run();
+        return task;
     }
 }

@@ -1,13 +1,10 @@
 package config;
 
 import core.ABean;
-import core.AsyncBean;
 import core.BBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.scheduling.annotation.EnableAsync;
-import tm.OneBean;
 
 /**
  * Created by Administrator on 2019/8/28 8:55.
