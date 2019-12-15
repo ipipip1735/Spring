@@ -184,9 +184,8 @@ public class Main {
 
         AnnotationConfigApplicationContext appContext =
                 new AnnotationConfigApplicationContext(config.ScheduleConfig.class);
-        ScheduleBean scheduleBean = appContext.getBean(ScheduleBean.class);
-
-        scheduleBean.scheduling();
+//        ScheduleBean scheduleBean = appContext.getBean(ScheduleBean.class);
+//        scheduleBean.scheduling();
 
     }
 

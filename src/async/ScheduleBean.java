@@ -17,9 +17,8 @@ import java.util.TimeZone;
  */
 public class ScheduleBean {
 
-    @Autowired
-    TaskScheduler taskScheduler;
 
+    //使用@Scheduled注解
 ////    @Scheduled(fixedDelay = 5000)
 ////    @Scheduled(fixedRate = 5000)
 //    @Scheduled(initialDelay = 10000, fixedRate = 5000)
@@ -35,21 +34,33 @@ public class ScheduleBean {
 //    }
 
 
+    //直接注入计划任务器
+//    @Autowired
+//    TaskScheduler taskScheduler;
+//    public void scheduling() {
+//        taskScheduler.schedule(() -> {
+//            System.out.println("scheduling start" + System.currentTimeMillis());
+//            try {
+//                Thread.sleep(3000L);
+//
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//            System.out.println(Thread.currentThread());
+//            System.out.println("scheduling end" + System.currentTimeMillis());
+//        }, new CronTrigger("0/5 * * * * *", TimeZone.getTimeZone(ZoneId.of("+8"))));
+//    }
+
+
     public void scheduling() {
-
-        taskScheduler.schedule(() -> {
-            System.out.println("scheduling start" + System.currentTimeMillis());
-            try {
-                Thread.sleep(3000L);
-
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            System.out.println(Thread.currentThread());
-            System.out.println("scheduling end" + System.currentTimeMillis());
-        }, new CronTrigger("0/5 * * * * *", TimeZone.getTimeZone(ZoneId.of("+8"))));
-
-
+        System.out.println("scheduling start");
+        System.out.println(Thread.currentThread());
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("scheduling end");
     }
 
 }
