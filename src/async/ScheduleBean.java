@@ -52,6 +52,7 @@ public class ScheduleBean {
 //    }
 
 
+    //通过实现SchedulingConfigurer执行计划任务
     public void scheduling() {
         System.out.println("scheduling start");
         System.out.println(Thread.currentThread());

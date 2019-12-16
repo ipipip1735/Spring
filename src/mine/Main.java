@@ -176,16 +176,21 @@ public class Main {
 
 //        resourceAnno();
 //        taskExecutor();//异步任务
-        taskScheduler();//定时器
+        taskScheduler();//计划任务
 
     }
 
     private void taskScheduler() {
 
-        AnnotationConfigApplicationContext appContext =
-                new AnnotationConfigApplicationContext(config.ScheduleConfig.class);
+        //方式一：使用@Scheduled注解
+//        AnnotationConfigApplicationContext appContext =
+//                new AnnotationConfigApplicationContext(config.ScheduleConfig.class);
 //        ScheduleBean scheduleBean = appContext.getBean(ScheduleBean.class);
 //        scheduleBean.scheduling();
+
+
+        //方式二：实现SchedulingConfigurer接口，读取配置文件后自动执行添加的计划任务
+        AnnotationConfigApplicationContext appContext = new AnnotationConfigApplicationContext(config.ScheduleConfig.class);
 
     }
 

@@ -48,6 +48,7 @@ public class ScheduleConfig implements SchedulingConfigurer {
     @Override
     public void configureTasks(ScheduledTaskRegistrar taskRegistrar) {
 
+        //使用注册器增加计划任务
         taskRegistrar.addCronTask(()->{
             System.out.println("~~task~~");
             scheduleBean().scheduling();
