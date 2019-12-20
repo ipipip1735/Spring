@@ -165,7 +165,7 @@ public class Main {
 
     private void annotation() {
 
-//        coreAnno();
+        coreAnno();
 //        autowiredAnno();
 //        profileAnno();
 //        tmAnno();
@@ -176,7 +176,7 @@ public class Main {
 
 //        resourceAnno();
 //        taskExecutor();//异步任务
-        taskScheduler();//计划任务
+//        taskScheduler();//计划任务
 
     }
 
@@ -404,8 +404,18 @@ public class Main {
 
         //方式一：注解导入
 //        AnnotationConfigApplicationContext appContext = new AnnotationConfigApplicationContext(config.Configure.class);
-//        appContext.getBean("aa");
-//        appContext.getBean("car");
+//        appContext.getBean("aa"); //默认作用域，即单例
+
+        //作用域为多例
+        AnnotationConfigApplicationContext appContext =
+                new AnnotationConfigApplicationContext(config.BConfig.class);
+        config.Car car1 = (config.Car) appContext.getBean("car");
+//        System.out.println(car1);
+//        config.Car car2 = (config.Car) appContext.getBean("car");
+//        System.out.println(car2);
+
+        appContext.close();//关闭上下文对象，触发@Bean的destroyMethod属性指定的方法
+
 
         //方式二：编程式导入
 //        AnnotationConfigApplicationContext appContext = new AnnotationConfigApplicationContext();
