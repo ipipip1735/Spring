@@ -49,8 +49,8 @@ public class Main {
 
         Main main = new Main();
 
-//        main.xml();//基于XML的配置
-        main.annotation();//基于Annotation的配置
+        main.xml();//基于XML的配置
+//        main.annotation();//基于Annotation的配置
 
 
 //        main.restTemplator();
@@ -500,13 +500,13 @@ public class Main {
     }
 
     private void xml() {
-//        ioc();
+        ioc();
 //        lifecyle();
 //        event();
 //        aop();
 //        tm();
 //        dao();
-        bind();
+//        bind();
 //        i18n();
     }
 
@@ -750,8 +750,8 @@ public class Main {
     private void ioc() {
         //加载配置文件（使用ClassPathXmlApplicationContext）
         ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
-        One one = context.getBean("one", One.class);
-        one.show();
+//        One one = context.getBean("one", One.class);
+//        one.show();
 
 
         //加载配置文件（GenericApplicationContext）

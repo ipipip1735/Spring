@@ -8,17 +8,18 @@
            http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
     <!--使用注解-->
-    <context:annotation-config/>
+<!--    <context:annotation-config/>-->
 
     <!--指定属性配置文件路径-->
-        <context:property-placeholder location="classpath:one.properties"/>
+<!--        <context:property-placeholder location="classpath:one.properties"/>-->
 
 
     <!--包扫描-->
-    <!--    <context:component-scan base-package="scan">-->
-    <!--        <context:include-filter type="regex" expression=".A*"/>-->
-    <!--        <context:exclude-filter type="annotation" expression="scan.Af"/>-->
-    <!--    </context:component-scan>-->
+<!--        <context:component-scan base-package="scan, bi*" />&lt;!&ndash;多个包使用逗号分隔，支持通配符&ndash;&gt;-->
+        <context:component-scan base-package="scan">
+            <context:include-filter type="regex" expression="scan\.ASBean"/>
+<!--            <context:exclude-filter type="annotation" expression="scan.Af"/>-->
+        </context:component-scan>
 
     <!--依赖注入-->
 <!--            <import resource="ioc.xml"/>-->
@@ -45,7 +46,7 @@
 <!--        <import resource="binder.xml"/>-->
 
     <!--资源加载-->
-        <import resource="resouce.xml"/>
+<!--        <import resource="resouce.xml"/>-->
 
     <!--资源加载-->
 <!--        <import resource="i18n.xml"/>-->
