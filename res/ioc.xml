@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
@@ -8,17 +9,17 @@
             <property name="s" value="${s:88}"/>
 <!--            <property name="i" value="${i: 11}"/>-->
 <!--            <property name="f" value="${f: 1.5f}"/>-->
-<!--            <property name="ints" value="${ints: 0,2}"/>-->
+            <property name="ints" value="${ints: 0,2}"/>
         </bean>
 <!--        <bean id="one" class="core.One" lazy-init="true"></bean>-->
 
-<!--        <bean id="aB" class="core.ABean">-->
-<!--            <constructor-arg ref="bB"/>-->
+        <bean id="aB" class="core.ABean">
+            <constructor-arg ref="bB"/>
 <!--            <property name="c" ref="cB"/>-->
-<!--        </bean>-->
+        </bean>
 
 
-<!--        <bean id="bB" class="core.BBean" p:i="111" />-->
+        <bean id="bB" class="core.BBean" p:i="111" />
 <!--        <bean id="aware" class="core.AwareBean" />-->
 
 

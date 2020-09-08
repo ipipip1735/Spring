@@ -42,6 +42,10 @@ public class ABean{
         System.out.println("i is " + i);
     }
 
+    public void see() {
+        System.out.println("~~" + getClass().getSimpleName() + ".see~~");
+    }
+
     public String see(Integer i, Integer j) {
         System.out.println("~~" + getClass().getSimpleName() + ".see~~");
         System.out.println(i);

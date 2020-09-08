@@ -11,7 +11,7 @@
     <context:annotation-config/>
 
     <!--指定属性配置文件路径-->
-    <!--    <context:property-placeholder location="classpath:one.properties"/>-->
+        <context:property-placeholder location="classpath:one.properties"/>
 
 
     <!--包扫描-->
@@ -21,21 +21,21 @@
     <!--    </context:component-scan>-->
 
     <!--依赖注入-->
-    <!--        <import resource="ioc.xml"/>-->
+<!--            <import resource="ioc.xml"/>-->
 
     <!--监听器-->
 <!--    <import resource="linstner.xml"/>-->
 
 
     <!--基于注解的配置-->
-    <!--    <import resource="annotation.xml"/>-->
+<!--        <import resource="annotation.xml"/>-->
 
     <!--切面-->
-    <!--    <import resource="aop.xml"/>-->
+<!--        <import resource="aop.xml"/>-->
 
     <!--事务-->
     <!--    <import resource="tm.xml"/>-->
-<!--        <import resource="tm_listener.xml"/>-->
+    <!--    <import resource="tm_listener.xml"/>-->
     <!--    <import resource="tm_annatation.xml"/>-->
 
     <!--数据访问-->
@@ -45,10 +45,10 @@
 <!--        <import resource="binder.xml"/>-->
 
     <!--资源加载-->
-<!--        <import resource="resouce.xml"/>-->
+        <import resource="resouce.xml"/>
 
     <!--资源加载-->
-        <import resource="i18n.xml"/>
+<!--        <import resource="i18n.xml"/>-->
 
 
 </beans>

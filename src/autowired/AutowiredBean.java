@@ -19,14 +19,15 @@ public class AutowiredBean {
 //    @Resource(name = "two")
     public Autowire one;
 
-//    @Autowired
-//    @Qualifier("two")
-//    @Resource(name = "two")
+////    @Autowired
+//    @Resource
 //    public void setOne(AutowiredOneBean one) {
 //        this.one = one;
 //    }
 
-//    public AutowiredBean() {
+////    @Autowired //4.3以后构造函数参数自动装配不需要注解
+//    public AutowiredBean(AutowiredOneBean one) {
+//        System.out.println("---- " + getClass().getSimpleName() + ".AutowiredBean ----");
 //        this.one = one;
 //    }
 

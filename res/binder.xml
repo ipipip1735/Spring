@@ -16,13 +16,13 @@
 
 
     <!--转换器-->
-    <!--    <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">-->
-    <!--        <property name="converters">-->
-    <!--            <set>-->
-    <!--                <bean class="bind.CarConverter"/>-->
-    <!--            </set>-->
-    <!--        </property>-->
-    <!--    </bean>-->
+        <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
+            <property name="converters">
+                <set>
+                    <bean class="bind.CarConverter"/>
+                </set>
+            </property>
+        </bean>
 
     <!--格式化-->
 
@@ -63,7 +63,7 @@
 <!--    </bean>-->
 
 
-    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
+<!--    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>-->
 
 
 </beans>

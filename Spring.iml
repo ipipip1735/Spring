@@ -52,7 +52,6 @@
     <orderEntry type="library" name="mysql:mysql-connector-java:8.0.17" level="application" />
     <orderEntry type="library" name="javax.validation:validation-api:2.0.1.Final" level="application" />
     <orderEntry type="library" name="org.hibernate:hibernate-validator:6.0.17.Final" level="application" />
-    <orderEntry type="library" name="javax.el:javax.el-api:3.0.0" level="application" />
     <orderEntry type="library" name="org.hibernate:hibernate-validator:6.0.17.Final" level="application" />
     <orderEntry type="library" name="org.glassfish:javax.el:3.0.0" level="application" />
     <orderEntry type="library" name="commons-fileupload:commons-fileupload:1.4" level="application" />
@@ -61,6 +60,8 @@
     <orderEntry type="library" name="org.springframework:spring-webmvc:5.2.0.RELEASE" level="application" />
     <orderEntry type="library" name="org.springframework:spring-context:5.2.0.RELEASE" level="application" />
     <orderEntry type="library" name="org.springframework:spring-aspects:5.2.0.RELEASE" level="application" />
+    <orderEntry type="library" name="javax.el:javax.el-api:3.0.0" level="application" />
+    <orderEntry type="library" name="org.hibernate:hibernate-validator:6.0.17.Final1" level="application" />
     <orderEntry type="library" name="org.springframework:spring-web:5.2.0.RELEASE" level="application" />
   </component>
 </module>
