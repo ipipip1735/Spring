@@ -6,15 +6,20 @@ import bind.Teacher;
 import config.*;
 import autowired.AutowiredBean;
 import async.AsyncBean;
+import core.AwareBean;
+import core.One;
+import core.OneService;
 import dao.PersonDAO;
 import i18n.OneBean;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.PropertyValue;
 import org.springframework.beans.PropertyValues;
+import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.format.support.DefaultFormattingConversionService;
@@ -165,7 +170,7 @@ public class Main {
 
     private void annotation() {
 
-        coreAnno();
+//        coreAnno();
 //        autowiredAnno();
 //        profileAnno();
 //        tmAnno();
@@ -174,7 +179,7 @@ public class Main {
 //        propertyEditorAnno();
 //        i18nAnno();
 
-//        resourceAnno();
+        resourceAnno();
 //        taskExecutor();//异步任务
 //        taskScheduler();//计划任务
 
@@ -205,9 +210,10 @@ public class Main {
 
     private void autowiredAnno() {
         AnnotationConfigApplicationContext appContext = new AnnotationConfigApplicationContext(AutowiredConfig.class);
-        AutowiredBean autowiredBean = (AutowiredBean) appContext.getBean(AutowiredBean.class);
+        AutowiredBean autowiredBean = appContext.getBean(AutowiredBean.class);
+        System.out.println(autowiredBean);
         System.out.println(autowiredBean.one);
-        autowiredBean.one.show();
+//        autowiredBean.one.show();
 
     }
 
@@ -260,11 +266,11 @@ public class Main {
 
         //加载资源
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ResouceConfig.class);
-//        ABean aBean = (ABean) context.getBean("aBean");
-        ABean aBean = context.getBean(ABean.class);
-//        System.out.println(aBean.getTxt());
-//        System.out.println(aBean.getText());
-        System.out.println(aBean.getNote());
+        ABean aBean = (ABean) context.getBean("aBean");
+//        ABean aBean = context.getBean(ABean.class);
+        System.out.println("getTxt is " + aBean.getTxt());
+        System.out.println("getText is " + aBean.getText());
+        System.out.println("getNote is " + aBean.getNote());
 
 
     }
@@ -500,7 +506,7 @@ public class Main {
 //        aop();
 //        tm();
 //        dao();
-//        bind();
+        bind();
 //        i18n();
     }
 
@@ -521,8 +527,8 @@ public class Main {
     private void bind() {
 
 
-        validate();//验证
-//        convert();//转换
+//        validate();//验证
+        convert();//转换
 //        formatter();
 
 
@@ -719,7 +725,9 @@ public class Main {
     private void aop() {
         ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
         aop.ABean aBean = context.getBean("ab", aop.ABean.class);//获取Bean
-        aBean.look();
+        aBean.show();
+//        aBean.see();
+//        aBean.look();
 
 
 //        aBean.show();//零参数
@@ -740,17 +748,26 @@ public class Main {
     }
 
     private void ioc() {
+        //加载配置文件（使用ClassPathXmlApplicationContext）
         ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
-//        One one = context.getBean("one", One.class);
-//        one.show();
+        One one = context.getBean("one", One.class);
+        one.show();
 
 
+        //加载配置文件（GenericApplicationContext）
 //        GenericApplicationContext genericApplicationContext = new GenericApplicationContext();
 //        new XmlBeanDefinitionReader(genericApplicationContext).loadBeanDefinitions("service.xml");
 //        genericApplicationContext.refresh();
+//        OneService oneService = genericApplicationContext.getBean("oneService", OneService.class);
 
 
-//        AwareBean aware = context.getBean("aware", AwareBean.class);
+
+        //构造函数注入
+//        ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+//        core.ABean aBean = context.getBean("aB", core.ABean.class);
+
+
+
 
 
     }

@@ -10,7 +10,7 @@ import java.lang.annotation.Annotation;
 /**
  * Created by Administrator on 2019/8/18.
  */
-@Aspect
+//@Aspect
 public class CAOP implements Ordered{
     public void setOrder(int order) {
         this.order = order;
@@ -27,10 +27,10 @@ public class CAOP implements Ordered{
         System.out.println("*********  " + getClass().getSimpleName() + ".Constructor  *********");
     }
 
-    @Pointcut("execution(public * aop.ABean.*())")
+//    @Pointcut("execution(public * aop.ABean.*())")
     public void pcOne() {}
 
-    @Before("pcOne()")
+//    @Before("pcOne()")
     public void one() {
         System.out.println("~~" + getClass().getSimpleName() + ".one~~");
     }
