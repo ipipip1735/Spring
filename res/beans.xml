@@ -16,10 +16,10 @@
 
     <!--包扫描-->
 <!--        <context:component-scan base-package="scan, bi*" />&lt;!&ndash;多个包使用逗号分隔，支持通配符&ndash;&gt;-->
-        <context:component-scan base-package="scan">
-            <context:include-filter type="regex" expression="scan\.ASBean"/>
-<!--            <context:exclude-filter type="annotation" expression="scan.Af"/>-->
-        </context:component-scan>
+<!--        <context:component-scan base-package="scan">-->
+<!--            <context:include-filter type="regex" expression="scan\.ASBean"/>-->
+<!--&lt;!&ndash;            <context:exclude-filter type="annotation" expression="scan.Af"/>&ndash;&gt;-->
+<!--        </context:component-scan>-->
 
     <!--依赖注入-->
 <!--            <import resource="ioc.xml"/>-->
@@ -43,7 +43,7 @@
     <!--    <import resource="dao.xml"/>-->
 
     <!--数据绑定-->
-<!--        <import resource="binder.xml"/>-->
+        <import resource="binder.xml"/>
 
     <!--资源加载-->
 <!--        <import resource="resouce.xml"/>-->

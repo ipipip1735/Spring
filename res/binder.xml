@@ -16,26 +16,30 @@
 
 
     <!--转换器-->
-        <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
-            <property name="converters">
-                <set>
-                    <bean class="bind.CarConverter"/>
-                </set>
-            </property>
-        </bean>
-
-    <!--格式化-->
-
-    <!--方式一：使用默认格式工具和转换工具-->
-<!--    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">-->
-<!--        <property name="formatters">-->
+<!--    <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">-->
+<!--        <property name="converters">-->
 <!--            <set>-->
-<!--                <bean class="org.springframework.format.datetime.DateFormatter">-->
-<!--                    <property name="pattern" value="yyyyMMdd"/>-->
-<!--                </bean>-->
+<!--                <bean class="bind.CarConverter"/>-->
+<!--                <bean class="bind.DateConverter"/>-->
 <!--            </set>-->
 <!--        </property>-->
 <!--    </bean>-->
+
+
+
+
+
+    <!--格式化-->
+    <!--方式一：使用默认格式工具和转换工具-->
+    <bean id="formattingConversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <property name="formatters">
+            <set>
+                <bean class="org.springframework.format.datetime.DateFormatter">
+                    <property name="pattern" value="yyyyMMdd"/>
+                </bean>
+            </set>
+        </property>
+    </bean>
 
     <!--方式二：使用默认格式工具和转换工具-->
 <!--    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">-->
@@ -63,6 +67,10 @@
 <!--    </bean>-->
 
 
+
+
+
+    <!--验证器-->
 <!--    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>-->
 
 

@@ -23,6 +23,8 @@ import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.format.support.DefaultFormattingConversionService;
+import org.springframework.format.support.FormattingConversionService;
+import org.springframework.format.support.FormattingConversionServiceFactoryBean;
 import org.springframework.http.*;
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.util.concurrent.ListenableFutureCallback;
@@ -38,6 +40,7 @@ import tm.TwoBean;
 import java.beans.PropertyEditor;
 import java.beans.PropertyEditorSupport;
 import java.net.URI;
+import java.time.Instant;
 import java.util.*;
 
 /**
@@ -79,7 +82,6 @@ public class Main {
     }
 
     private void restExchange() {
-
 
         String uriTemplate = "http://localhost:8080/restapi";
         URI uri = UriComponentsBuilder.fromUriString(uriTemplate)
@@ -500,13 +502,13 @@ public class Main {
     }
 
     private void xml() {
-        ioc();
+//        ioc();
 //        lifecyle();
 //        event();
 //        aop();
 //        tm();
 //        dao();
-//        bind();
+        bind();
 //        i18n();
     }
 
@@ -543,9 +545,14 @@ public class Main {
 
         ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 
-        ConversionService conversionService = (ConversionService) context.getBean("conversionService");
-        if (conversionService.canConvert(String.class, Date.class)) {//判断是否能转换
-            Date date = conversionService.convert("19210203", Date.class);//转换
+        FormattingConversionService formattingConversionService = (FormattingConversionService) context.getBean("formattingConversionService");
+        if (formattingConversionService.canConvert(String.class, Date.class)) { //判断是否能转换
+            Date date = formattingConversionService.convert("19210203", Date.class); //转换
+            System.out.println(date);
+        }
+
+        if (formattingConversionService.canConvert(Date.class, String.class)) { //判断是否能转换
+            String date = formattingConversionService.convert(new Date(Instant.now().toEpochMilli()), String.class); //转换
             System.out.println(date);
         }
 
@@ -599,10 +606,27 @@ public class Main {
     private void convert() {
         ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 
-        ConversionService conversionService = (ConversionService) context.getBean("conversionService");
-        Car car = conversionService.convert("o", Car.class);
-        System.out.println(car);
+        //方式一：手动转换
+//        ConversionService conversionService = (ConversionService) context.getBean("conversionService");
+//
+//        if (conversionService.canConvert(String.class, Car.class)) {
+//            Car car = conversionService.convert("o", Car.class);
+//            System.out.println(car);
+//        }
 
+
+        //方式二：自动转换
+        Car car = new Car();
+        DataBinder dataBinder = new DataBinder(car);
+
+        List<PropertyValue> list = new ArrayList<>();
+        list.add(new PropertyValue("date", "20191212"));
+        PropertyValues propertyValues = new MutablePropertyValues(list);
+
+        dataBinder.setConversionService((ConversionService)context.getBean("conversionService"));
+        dataBinder.bind(propertyValues);
+
+        System.out.println(car.getDate());
 
     }
 
@@ -761,13 +785,9 @@ public class Main {
 //        OneService oneService = genericApplicationContext.getBean("oneService", OneService.class);
 
 
-
         //构造函数注入
 //        ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 //        core.ABean aBean = context.getBean("aB", core.ABean.class);
-
-
-
 
 
     }

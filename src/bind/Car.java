@@ -37,6 +37,7 @@ public class Car {
     }
 
     public Date getDate() {
+        System.out.println("~~" + getClass().getSimpleName() + ".getDate~~");
         return date;
     }
 
